@@ -7,8 +7,16 @@
 
 
 # 版本
+## Branch最爱白菜呀
 
+### 1.0.1-解决首页登录成功
 
+- [x] user/login总是报登录失败的错误
+
+  1. 由npm dev启动改成npm start启动
+
+- 上传无影响资源文件
+## Master
 
 ### 1.0.1 老尚的vite-project 的login 和reqdosql
 
