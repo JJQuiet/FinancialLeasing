@@ -9,6 +9,8 @@ export default {
   'menu.register-result': '注册结果',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析页',
+//   'menu.jlogin1': 'j登录1',
+  'menu.dashboard.jlogin': 'jjq登录',
   'menu.dashboard.monitor': '监控页',
   'menu.dashboard.workplace': '工作台',
   'menu.exception.403': '403',

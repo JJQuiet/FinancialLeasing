@@ -34,6 +34,7 @@ export default defineConfig({
   },
   // umi routes: https://umijs.org/docs/routing
   routes: [
+    // {path: '/jlogin1',component:'./login',name:'jlogin1',icon:'smile'},
     {
       path: '/user',
       layout: false,
@@ -74,6 +75,7 @@ export default defineConfig({
           path: '/dashboard',
           redirect: '/dashboard/analysis',
         },
+        {name:'jlogin',path: '/dashboard/jlogin',component:'./login',},
         {
           name: 'analysis',
           icon: 'smile',
