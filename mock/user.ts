@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { reqdoSQL } from '../src/api/dosql';
 
 const waitTime = (time: number = 100) => {
   return new Promise((resolve) => {
@@ -119,8 +120,10 @@ export default {
   ],
   'POST /api/login/account': async (req: Request, res: Response) => {
     const { password, username, type } = req.body;
-    await waitTime(2000);
-    if (password === 'ant.design' && username === 'admin') {
+    const data = (
+      await reqdoSQL({ sqlprocedure: 'afl_002', username: username, password: password })
+    ).rows[0];
+    if(data.status === 'ok'){
       res.send({
         status: 'ok',
         type,

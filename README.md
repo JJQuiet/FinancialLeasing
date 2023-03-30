@@ -9,6 +9,12 @@
 # 版本
 ## Branch最爱白菜呀
 
+### 1.0.3-登录信息与数据库验证
+
+- 能够用数据库信息验证登录。因为有access变量在fetchUserInfo调用/api/currentUser中用到，因此reqdosql在mock 的api里面写，
+
+### 1.0.2-菜单路由配置，成功在layout显示了菜单及对应的组件
+
 ### 1.0.1-解决首页登录成功
 
 - [x] user/login总是报登录失败的错误
