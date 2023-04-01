@@ -81,6 +81,7 @@ export default defineConfig({
           icon: 'smile',
           path: '/dashboard/analysis',
           component: './dashboard/analysis',
+          // access: 'canAdmin',
         },
         {
           name: 'monitor',

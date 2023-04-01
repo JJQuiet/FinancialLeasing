@@ -1,0 +1,59 @@
+import {PageContainer} from '@ant-design/pro-layout';
+import {getGoodsList} from '@/services/ant-design-pro/goods';
+import {useRef} from 'react';
+import type { ActionType,ProColumns } from '@ant-design/pro-table';
+import type { RecordKey } from '@ant-design/pro-utils/lib/useEditableArray';
+import ProTable from '@ant-design/pro-table';
+
+const Goods = () => {
+  const columns: ProColumns<API.GoodItem>[] = [
+    {
+      title: 'IDJJQ',
+      dataIndex: 'id',
+      tip: 'id具有唯一性'，
+    },
+    {
+      title: '产品名称',
+      dataIndex: 'name'
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      valueEnum:{
+        0: {
+          text: '正常',
+          status: 'default'
+        },
+        1: {
+          text: '热销',
+          status: 'Success'
+        },
+        2: {
+          text: '缺货',
+          status: 'Error'
+        }
+      }
+    }
+  ];
+  const actionRef = useRef<ActionType>();
+  return (<>
+    <PageContainer>
+      <ProTable<API.GoodsItem,API.PageParams>
+        actionRef={actionRef}
+        editable={{
+          onSave:(key: RecordKey,row: API.GoodsItem) => {
+
+            return Promise.resolve()
+          },
+          onDelete:(key: RecordKey,row: API.GoodsItem) => {
+
+            return Promise.resolve()
+          },
+        }}
+        columns={columns}
+        rowKey={'id'}
+    </PageContainer>
+
+
+    </>)
+}

@@ -123,7 +123,7 @@ export default {
     const data = (
       await reqdoSQL({ sqlprocedure: 'afl_002', username: username, password: password })
     ).rows[0];
-    if(data.status === 'ok'){
+    if (data.status === 'ok' && data.currentauthority === 'admin') {
       res.send({
         status: 'ok',
         type,
@@ -132,7 +132,7 @@ export default {
       access = 'admin';
       return;
     }
-    if (password === 'ant.design' && username === 'user') {
+    if (data.status === 'ok' && data.currentauthority === 'user') {
       res.send({
         status: 'ok',
         type,
