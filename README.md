@@ -5,6 +5,13 @@
 
 ## Branch 最爱白菜呀-实现 proTable
 
+### 1.1.0 seller02 proTable request
+
+- [ ] 如何获取当前登录用户信息
+
+- seller02 在 proTable 里面修改 request，成功获得数据
+- proTable 属性 pagination 里面定义 pageSize
+
 ### 1.0.4-文字介绍修改
 
 - 更改了 headerTheme 为 light（从 ts 的数据类型鼠标跳转看到 layout 的源码上介绍有哪些参数及用法很详细）
@@ -20,7 +27,7 @@
 
 ### 1.0.1-解决首页登录成功
 
-- [X] user/login 总是报登录失败的错误
+- [x] user/login 总是报登录失败的错误
 
   1. 由 npm dev 启动改成 npm start 启动
 

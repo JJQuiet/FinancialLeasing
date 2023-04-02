@@ -75,13 +75,19 @@ export default defineConfig({
           path: '/dashboard',
           redirect: '/dashboard/analysis',
         },
-        {name:'jlogin',path: '/dashboard/jlogin',component:'./login',},
+        { name: 'jlogin', path: '/dashboard/jlogin', component: './login' },
         {
           name: 'analysis',
           icon: 'smile',
           path: '/dashboard/analysis',
           component: './dashboard/analysis',
           // access: 'canAdmin',
+        },
+        {
+          name: 'seller02',
+          icon: 'smile',
+          path: '/dashboard/seller02',
+          component: './organization/seller02',
         },
         {
           name: 'monitor',
