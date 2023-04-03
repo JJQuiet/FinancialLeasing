@@ -6,10 +6,10 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8000/"
+      "url": "http://localhost:8557/"
     },
     {
-      "url": "https://localhost:8000/"
+      "url": "https://localhost:8557/"
     }
   ],
   "paths": {
@@ -560,7 +560,9 @@
             "type": "string",
             "format": "any"
           },
-          "key": { "type": "string" },
+          "key": {
+            "type": "string"
+          },
           "read": {
             "type": "boolean"
           },

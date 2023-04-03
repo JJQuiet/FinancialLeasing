@@ -90,6 +90,12 @@ export default defineConfig({
           component: './organization/seller02',
         },
         {
+          name: 'seller03',
+          icon: 'smile',
+          path: '/dashboard/seller03',
+          component: './organization/seller03',
+        },
+        {
           name: 'monitor',
           icon: 'smile',
           path: '/dashboard/monitor',

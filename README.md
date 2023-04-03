@@ -5,6 +5,12 @@
 
 ## Branch 最爱白菜呀-实现 proTable
 
+### 1.1.1 proTable 删除行
+
+- 登录后 setInitialState currentUser，首页的最起码改了
+
+- [ ] 多角色权限管理
+
 ### 1.1.0 seller02 proTable request
 
 - [ ] 如何获取当前登录用户信息

@@ -15,6 +15,7 @@ import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 
 import styles from './index.less';
+import { reqdoSQL } from '@/api/dosql';
 
 const LoginMessage: React.FC<{
   content: string;
@@ -36,8 +37,19 @@ const Login: React.FC = () => {
 
   const intl = useIntl();
 
-  const fetchUserInfo = async () => {
-    const userInfo = await initialState?.fetchUserInfo?.();
+  const fetchUserInfo = async (values: any) => {
+    const data = // await reqdoSQL({
+    //   sqlprocedure: 'afl006_users_getCurrentUser_init',
+    //   username: values.username,
+    //   password: values.password,
+    // })
+    (
+      await reqdoSQL({
+        sqlprocedure: 'afl007_getRandomRowFromTestProtable',
+      })
+    ).rows[0];
+    const userInfo = data;
+    // const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
       await setInitialState((s) => ({
         ...s,
@@ -56,7 +68,7 @@ const Login: React.FC = () => {
           defaultMessage: '登录成功！',
         });
         message.success(defaultLoginSuccessMessage);
-        await fetchUserInfo();
+        await fetchUserInfo(values);
         /** 此方法会跳转到 redirect 参数所在的位置 */
         if (!history) return;
         const { query } = history.location;

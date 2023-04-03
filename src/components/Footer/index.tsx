@@ -1,5 +1,5 @@
 import { useIntl } from 'umi';
-import { GithubOutlined,AntDesignOutlined } from '@ant-design/icons';
+import { GithubOutlined, AntDesignOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-layout';
 
 const Footer: React.FC = () => {
@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
         {
           key: 'Ant Design Pro',
           title: 'Ant Design Pro',
-          href: 'https://pro.ant.design/zh-CN/docs/folder',
+          href: 'https://pro.ant.design/zh-CN/docs/overview',
           blankTarget: true,
         },
         {
