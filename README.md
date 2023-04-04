@@ -5,6 +5,11 @@
 
 ## Branch 最爱白菜呀-实现 proTable
 
+### 1.1.2 用户权限表（curUser)及菜单权限
+
+- access: strict mode
+- setInitialState curUser
+
 ### 1.1.1 proTable 删除行
 
 - 登录后 setInitialState currentUser，首页的最起码改了

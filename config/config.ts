@@ -44,6 +44,7 @@ export default defineConfig({
           layout: false,
           name: 'login',
           component: './user/Login',
+          access: 'true',
         },
         {
           path: '/user',
@@ -70,6 +71,7 @@ export default defineConfig({
       path: '/dashboard',
       name: 'dashboard',
       icon: 'dashboard',
+      access: 'ture',
       routes: [
         {
           path: '/dashboard',
@@ -81,7 +83,7 @@ export default defineConfig({
           icon: 'smile',
           path: '/dashboard/analysis',
           component: './dashboard/analysis',
-          // access: 'canAdmin',
+          // access: 'isAdmin',
         },
         {
           name: 'seller02',
@@ -94,6 +96,7 @@ export default defineConfig({
           icon: 'smile',
           path: '/dashboard/seller03',
           component: './organization/seller03',
+          access: 'isUser',
         },
         {
           name: 'monitor',
@@ -275,6 +278,7 @@ export default defineConfig({
       name: 'account',
       icon: 'user',
       path: '/account',
+      access: 'canAccount',
       routes: [
         {
           path: '/account',
@@ -291,6 +295,7 @@ export default defineConfig({
           icon: 'smile',
           path: '/account/settings',
           component: './account/settings',
+          access: 'canAccount',
         },
       ],
     },
@@ -331,7 +336,7 @@ export default defineConfig({
       component: '404',
     },
   ],
-  access: {},
+  access: { strictMode: true },
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     // 如果不想要 configProvide 动态设置主题需要把这个设置为 default

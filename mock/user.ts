@@ -121,24 +121,24 @@ export default {
   'POST /api/login/account': async (req: Request, res: Response) => {
     const { password, username, type } = req.body;
     const data = (
-      await reqdoSQL({ sqlprocedure: 'afl_002', username: username, password: password })
-    ).rows[0];
-    if (data.status === 'ok' && data.currentauthority === 'admin') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'admin',
-      });
-      access = 'admin';
-      return;
-    }
-    if (data.status === 'ok' && data.currentauthority === 'user') {
+      await reqdoSQL({ sqlprocedure: 'b01_login01', phone_or_email: username, password: password })
+    ).rows;
+    if (data.length === 1 && data[0].authority === 'tenantry') {
       res.send({
         status: 'ok',
         type,
         currentAuthority: 'user',
       });
       access = 'user';
+      return;
+    }
+    if (data.length === 1 && data[0].authority === 'administrator') {
+      res.send({
+        status: 'ok',
+        type,
+        currentAuthority: 'admin',
+      });
+      access = 'admin';
       return;
     }
     if (type === 'mobile') {

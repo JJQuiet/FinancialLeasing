@@ -39,21 +39,25 @@ const Login: React.FC = () => {
 
   const fetchUserInfo = async (values: any) => {
     const data = // await reqdoSQL({
-    //   sqlprocedure: 'afl006_users_getCurrentUser_init',
-    //   username: values.username,
-    //   password: values.password,
-    // })
-    (
+      (
+        await reqdoSQL({
+          sqlprocedure: 'afl007_getRandomRowFromTestProtable',
+        })
+      ).rows[0];
+    const userInfo = data;
+    const data2 = (
       await reqdoSQL({
-        sqlprocedure: 'afl007_getRandomRowFromTestProtable',
+        sqlprocedure: 'b01_login01',
+        phone_or_email: values.username,
+        password: values.password,
       })
     ).rows[0];
-    const userInfo = data;
     // const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
       await setInitialState((s) => ({
         ...s,
         currentUser: userInfo,
+        curUser: data2,
       }));
     }
   };
@@ -96,7 +100,8 @@ const Login: React.FC = () => {
       <div className={styles.content}>
         <LoginForm
           logo={<img alt="logo" src="/logo.svg" />}
-          title="Ant Design"
+          title="融资租赁业务管理系统"
+          // title="Ant Design"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           initialValues={{
             autoLogin: true,

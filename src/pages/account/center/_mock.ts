@@ -212,7 +212,6 @@ function fakeList(count: number): ListItemDataType[] {
       ],
     });
   }
-
   return list;
 }
 

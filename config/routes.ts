@@ -1,5 +1,5 @@
 ﻿export default [
-  {path: '/jjqlogin',component:'./login',layout: false},
+  { path: '/jjqlogin', component: './login', layout: false },
   {
     path: '/user',
     layout: false,
@@ -24,7 +24,7 @@
     path: '/admin',
     name: 'admin',
     icon: 'crown',
-    access: 'canAdmin',
+    access: 'isAdmin',
     component: './Admin',
     routes: [
       {
