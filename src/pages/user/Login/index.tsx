@@ -47,11 +47,12 @@ const Login: React.FC = () => {
     const userInfo = data;
     const data2 = (
       await reqdoSQL({
-        sqlprocedure: 'b01_login01',
+        sqlprocedure: 'b03_login_curUser',
         phone_or_email: values.username,
-        password: values.password,
+        authority: values.authority,
       })
     ).rows[0];
+    console.log('%c [ data2 ]', 'font-size:13px; background:pink; color:#b22c02;', data2);
     // const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
       await setInitialState((s) => ({
@@ -60,6 +61,11 @@ const Login: React.FC = () => {
         curUser: data2,
       }));
     }
+    console.log(
+      '%c [ initialState ]',
+      'font-size:13px; background:pink; color:#b22c02;',
+      initialState,
+    );
   };
 
   const handleSubmit = async (values: API.LoginParams) => {
@@ -72,7 +78,7 @@ const Login: React.FC = () => {
           defaultMessage: '登录成功！',
         });
         message.success(defaultLoginSuccessMessage);
-        await fetchUserInfo(values);
+        await fetchUserInfo({ ...values, authority: msg.currentAuthority });
         /** 此方法会跳转到 redirect 参数所在的位置 */
         if (!history) return;
         const { query } = history.location;

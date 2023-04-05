@@ -123,22 +123,49 @@ export default {
     const data = (
       await reqdoSQL({ sqlprocedure: 'b01_login01', phone_or_email: username, password: password })
     ).rows;
+    if (data.length === 1 && data[0].authority === 'financial_audit_admin') {
+      res.send({
+        status: 'ok',
+        type,
+        currentAuthority: 'financial_audit_admin',
+      });
+      access = 'financial_audit_admin';
+      return;
+    }
     if (data.length === 1 && data[0].authority === 'tenantry') {
       res.send({
         status: 'ok',
         type,
-        currentAuthority: 'user',
+        currentAuthority: 'tenantry',
       });
-      access = 'user';
+      access = 'tenantry';
       return;
     }
-    if (data.length === 1 && data[0].authority === 'administrator') {
+    if (data.length === 1 && data[0].authority === 'project_audit_admin') {
       res.send({
         status: 'ok',
         type,
-        currentAuthority: 'admin',
+        currentAuthority: 'project_audit_admin',
       });
-      access = 'admin';
+      access = 'project_audit_admin';
+      return;
+    }
+    if (data.length === 1 && data[0].authority === 'business_admin') {
+      res.send({
+        status: 'ok',
+        type,
+        currentAuthority: 'business_admin',
+      });
+      access = 'business_admin';
+      return;
+    }
+    if (data.length === 1 && data[0].authority === 'financial_officer') {
+      res.send({
+        status: 'ok',
+        type,
+        currentAuthority: 'financial_officer',
+      });
+      access = 'financial_officer';
       return;
     }
     if (type === 'mobile') {

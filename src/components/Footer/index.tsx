@@ -45,6 +45,12 @@ const Footer: React.FC = () => {
           href: 'https://v3.umijs.org/zh-CN/docs',
           blankTarget: true,
         },
+        {
+          key: 'dvajs',
+          title: 'DVA',
+          href: 'https://dvajs.com/guide/',
+          blankTarget: true,
+        },
       ]}
     />
   );

@@ -1,9 +1,19 @@
+-
 - umi3 antD pro v5 complete
 - **求知编程学院**[视频学习地址](https://www.bilibili.com/video/BV1SA411H7sX/?spm_id_from=333.999.0.0&vd_source=891093c1caed79794c25fe5f4b8eeae9)
 
 # 版本
 
 ## Branch 最爱白菜呀-实现 proTable
+
+### 1.2.1 承租客户成功显示
+
+- [ ] initialState 里的 curUser 第一次 console 有值,之后 undefined，不显示页面，之后再刷新有页面
+
+### 1.2.0 用户中心
+
+- user 的用户中心
+- 掌握了在 navicat 中建外键关联的表，先数据生成所有列，再把是外键的列的数据从父表拷贝覆盖到新表，然后再添加外键
 
 ### 1.1.2 用户权限表（curUser)及菜单权限
 

@@ -68,14 +68,39 @@ export default defineConfig({
       ],
     },
     {
+      path: '/organization',
+      name: '客户管理',
+      icon: 'profile',
+      access: 'true',
+      routes: [
+        {
+          path: '/organization',
+          redirect: '/organization/tenantry',
+        },
+        {
+          name: '承租客户',
+          icon: 'smile',
+          path: '/organization/tenantry',
+          access: 'isBusiness_admin',
+          component: './organization/tenantry',
+        },
+        // {
+        //   name: 'advanced',
+        //   icon: 'smile',
+        //   path: '/organization/advanced',
+        //   component: './organization/advanced',
+        // },
+      ],
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       icon: 'dashboard',
-      access: 'ture',
+      access: 'isBusiness_admin',
       routes: [
         {
           path: '/dashboard',
-          redirect: '/dashboard/analysis',
+          redirect: '/dashboard/seller02',
         },
         { name: 'jlogin', path: '/dashboard/jlogin', component: './login' },
         {
@@ -90,13 +115,13 @@ export default defineConfig({
           icon: 'smile',
           path: '/dashboard/seller02',
           component: './organization/seller02',
+          access: 'isBusiness_admin',
         },
         {
           name: 'seller03',
           icon: 'smile',
           path: '/dashboard/seller03',
           component: './organization/seller03',
-          access: 'isUser',
         },
         {
           name: 'monitor',
@@ -199,6 +224,7 @@ export default defineConfig({
         },
       ],
     },
+
     {
       path: '/profile',
       name: 'profile',
@@ -336,7 +362,9 @@ export default defineConfig({
       component: '404',
     },
   ],
-  access: { strictMode: true },
+  access: {
+    strictMode: true,
+  },
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     // 如果不想要 configProvide 动态设置主题需要把这个设置为 default

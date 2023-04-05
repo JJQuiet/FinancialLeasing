@@ -1,7 +1,7 @@
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { SettingDrawer } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
-import type { RunTimeLayoutConfig } from 'umi';
+import { RunTimeLayoutConfig, useModel } from 'umi';
 import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
@@ -38,11 +38,16 @@ export async function getInitialState(): Promise<{
   };
   // 如果不是登录页面，执行
   if (history.location.pathname !== loginPath) {
+    // const { initialState, setInitialState } = useModel('@@initialState');
+
     const currentUser = await fetchUserInfo();
-    console.log('zhisssss');
+    // const curUser =
+    // const { currentUser, curUser } = initialState ?? {};
+
     return {
       fetchUserInfo,
       currentUser,
+      // curUser,
       settings: defaultSettings,
     };
   }
