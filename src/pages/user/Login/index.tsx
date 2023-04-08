@@ -45,6 +45,7 @@ const Login: React.FC = () => {
         })
       ).rows[0];
     const userInfo = data;
+    console.log('%c [ userInfo ]', 'font-size:13px; background:pink; color:#b22c02;', userInfo);
     const data2 = (
       await reqdoSQL({
         sqlprocedure: 'b03_login_curUser',
@@ -52,7 +53,6 @@ const Login: React.FC = () => {
         authority: values.authority,
       })
     ).rows[0];
-    console.log('%c [ data2 ]', 'font-size:13px; background:pink; color:#b22c02;', data2);
     // const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
       await setInitialState((s) => ({
@@ -61,11 +61,6 @@ const Login: React.FC = () => {
         curUser: data2,
       }));
     }
-    console.log(
-      '%c [ initialState ]',
-      'font-size:13px; background:pink; color:#b22c02;',
-      initialState,
-    );
   };
 
   const handleSubmit = async (values: API.LoginParams) => {
@@ -105,7 +100,8 @@ const Login: React.FC = () => {
       </div>
       <div className={styles.content}>
         <LoginForm
-          logo={<img alt="logo" src="/logo.svg" />}
+          logo={<img alt="logo" src="/举手yeah.svg" />}
+          // logo={<img alt="logo" src="/logo.svg" />}
           title="融资租赁业务管理系统"
           // title="Ant Design"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}

@@ -1,10 +1,23 @@
--
+- 
 - umi3 antD pro v5 complete
 - **求知编程学院**[视频学习地址](https://www.bilibili.com/video/BV1SA411H7sX/?spm_id_from=333.999.0.0&vd_source=891093c1caed79794c25fe5f4b8eeae9)
 
 # 版本
 
 ## Branch 最爱白菜呀-实现 proTable
+
+### 1.3.1 引入Dva
+
+- 通过Dva, model实现了在基础的Table上面对tenantry的增加，删除，修改company_name(tenantry03_dva_basicTable)
+- proTable的数据展示直接request里的方法调用和删除行(_dtenantry02va)
+  ```javascript
+  request(`http://localhost:8081/myServer/doSQL?paramvalues=`+encodeURIComponent(JSON.stringify({sqlprocedure:
+  ```
+- [视频](https://www.bilibili.com/video/BV1qz411z7s3/ "张立志")例子入门（tenantryDva)
+
+- [ ] proTable上面还没有修改增加
+- [ ] typescript声明没有补充
+- [ ] request传分页参数还没做
 
 ### 1.2.1 承租客户成功显示
 
@@ -48,7 +61,7 @@
 
 ### 1.0.1-解决首页登录成功
 
-- [x] user/login 总是报登录失败的错误
+- [X] user/login 总是报登录失败的错误
 
   1. 由 npm dev 启动改成 npm start 启动
 

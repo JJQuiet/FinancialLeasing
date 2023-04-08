@@ -4,11 +4,15 @@ import { TenantryField } from './data';
 import { useRef, useState } from 'react';
 import { reqdoSQL } from '@/api/dosql';
 import { Button, message } from 'antd';
-import { getTenantry } from './service';
+import { getRemoteList } from '../tenantry02_dva/service';
+import { connect } from 'umi';
 // const getTenantryFields = async (selectedRows: TenantryField[]) => {
 
 // }
-
+const handleRequest = async ({ pageSize, current }) => {
+  const data = await getRemoteList();
+  return data;
+};
 const handleRemove = async (selectedRows: TenantryField[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
@@ -30,7 +34,7 @@ const handleRemove = async (selectedRows: TenantryField[]) => {
     return false;
   }
 };
-export default function Index() {
+const Index = (tenantry02_dva) => {
   const [selectedRowsState, setSelectedRows] = useState<TenantryField[]>([]);
   const actionRef = useRef<ActionType>();
 
@@ -96,10 +100,9 @@ export default function Index() {
         headerTitle="查询表格"
         actionRef={actionRef}
         rowKey="sysrowno"
-        // rowKey="key"
         columns={columns}
-        request={getTenantry}
-        // pagination={{ pageSize: 10 }}
+        request={handleRequest}
+        pagination={{ pageSize: 10 }}
         rowSelection={{
           onChange: (_, selectedRows) => {
             setSelectedRows(selectedRows);
@@ -131,4 +134,12 @@ export default function Index() {
       )}
     </PageContainer>
   );
-}
+};
+
+const mapStateToProps = ({ tenantry02_dva }) => {
+  return {
+    tenantry02_dva,
+  };
+};
+
+export default connect(mapStateToProps)(Index);

@@ -84,6 +84,27 @@ export default defineConfig({
           access: 'isBusiness_admin',
           component: './organization/tenantry',
         },
+        {
+          name: '承租客户Dva',
+          icon: 'smile',
+          path: '/organization/tenantryDva',
+          access: 'isBusiness_admin',
+          component: './organization/tenantryDva',
+        },
+        {
+          name: '承租客户02_Dva',
+          icon: 'smile',
+          path: '/organization/tenantry02_dva',
+          access: 'isBusiness_admin',
+          component: './organization/tenantry02_dva',
+        },
+        {
+          name: 'tenantry03_dva_basicTable',
+          icon: 'smile',
+          path: '/organization/tenantry03_dva_basicTable',
+          access: 'isBusiness_admin',
+          component: './organization/tenantry03_dva_basicTable',
+        },
         // {
         //   name: 'advanced',
         //   icon: 'smile',
