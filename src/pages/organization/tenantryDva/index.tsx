@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 // }
 
-const Index = ({ index:any,dispatch }) => {
+const Index = ({ index,dispatch }) => {
   const [isModalOpen, setIsModaOpen] = useState(false);
   const [record, setRecord] = useState(undefined);
   const onFinish = (values: any,record: any) => {
