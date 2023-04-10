@@ -5,11 +5,11 @@ import { useRef, useState } from 'react';
 import { reqdoSQL } from '@/api/dosql';
 import { Button, message } from 'antd';
 import { getRemoteList } from '../tenantry02_dva/service';
-import { connect } from 'umi';
+import { SingleTenantryType, TenantryState, connect } from 'umi';
 // const getTenantryFields = async (selectedRows: TenantryField[]) => {
 
 // }
-const handleRequest = async ({ pageSize, current }) => {
+const handleRequest = async ({pageSize,current}:{ pageSize:number, current:number }) => {
   const data = await getRemoteList();
   return data;
 };
@@ -34,11 +34,11 @@ const handleRemove = async (selectedRows: TenantryField[]) => {
     return false;
   }
 };
-const Index = (tenantry02_dva) => {
+const Index = (tenantry02_dva:any) => {
   const [selectedRowsState, setSelectedRows] = useState<TenantryField[]>([]);
   const actionRef = useRef<ActionType>();
 
-  const columns: ProColumns[] = [
+  const columns: ProColumns<SingleTenantryType>[] = [
     {
       title: '法人代表',
       dataIndex: 'name',
@@ -136,7 +136,7 @@ const Index = (tenantry02_dva) => {
   );
 };
 
-const mapStateToProps = ({ tenantry02_dva }) => {
+const mapStateToProps = ({ tenantry02_dva }:{tenantry02_dva:TenantryState}) => {
   return {
     tenantry02_dva,
   };

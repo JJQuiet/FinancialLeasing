@@ -1,20 +1,27 @@
-import { Modal, Form, Input, Button, Checkbox } from 'antd';
-import { useEffect } from 'react';
+import { Modal, Form, Input,message, } from 'antd';
+import { useEffect, FC } from 'react';
+import { SingleUserType, FormValues } from '../data';
 
-const UserModal = (props: { record: any; open: any; close: any; onFinish: any }) => {
+interface UserModalProps {
+  record: SingleUserType | undefined;
+  open: boolean;
+  close: () => void;
+  onFinish: (values: FormValues) => void;
+}
+const UserModal: FC<UserModalProps> = (props) => {
   const [form] = Form.useForm();
   const { record, open, close, onFinish } = props;
 
   useEffect(() => {
     form.setFieldsValue(record);
   }, [open]);
-  
+
   const onOk = () => {
     form.submit();
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('onFinishFailed');
+    message.error(errorInfo.errorFields[0].errors[0]);
   };
   return (
     <>

@@ -38,14 +38,14 @@ const Login: React.FC = () => {
   const intl = useIntl();
 
   const fetchUserInfo = async (values: any) => {
-    const data = // await reqdoSQL({
-      (
-        await reqdoSQL({
-          sqlprocedure: 'afl007_getRandomRowFromTestProtable',
-        })
-      ).rows[0];
-    const userInfo = data;
-    console.log('%c [ userInfo ]', 'font-size:13px; background:pink; color:#b22c02;', userInfo);
+    // const data = // await reqdoSQL({
+    //   (
+    //     await reqdoSQL({
+    //       sqlprocedure: 'afl007_getRandomRowFromTestProtable',
+    //     })
+    //   ).rows[0];
+    // const userInfo = data;
+    // console.log('%c [ userInfo ]', 'font-size:13px; background:pink; color:#b22c02;', userInfo);
     const data2 = (
       await reqdoSQL({
         sqlprocedure: 'b03_login_curUser',
@@ -53,7 +53,7 @@ const Login: React.FC = () => {
         authority: values.authority,
       })
     ).rows[0];
-    // const userInfo = await initialState?.fetchUserInfo?.();
+    const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
       await setInitialState((s) => ({
         ...s,

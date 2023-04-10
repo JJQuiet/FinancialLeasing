@@ -1,8 +1,7 @@
-import { Effect, Reducer, Subscription } from 'umi';
-import { getRemoteList, editRecord, deleteRecord } from './service';
+import { Reducer, Effect, Subscription } from 'umi';
+import { getRemoteList, editRecord, deleteRecord, addRecord } from './service';
 import { message } from 'antd';
 import { SingleUserType } from './data.d';
-
 export interface UserState {
   data: SingleUserType[];
   meta: {
@@ -12,34 +11,36 @@ export interface UserState {
   };
 }
 
-export interface UserModelType {
-  namespace: 'users';
+interface UserModelType {
+  namespace: 'aspirantzhang_users';
   state: UserState;
-  effects: {
-    getRemote: Effect;
-    edit: Effect;
-    delete: Effect;
-  };
   reducers: {
     getList: Reducer<UserState>;
-    // 启用 immer 之后
-    // save: ImmerReducer<IndexModelState>;
   };
-  subscriptions: { setup: Subscription };
+  effects: {
+    getRemote: Effect;
+    delete: Effect;
+  };
+  subscriptions: {
+    setup: Subscription;
+  };
 }
 
-const IndexModel: UserModelType = {
-  namespace: 'users',
-
+const UserModel: UserModelType = {
+  namespace: 'aspirantzhang_users',
   state: {
     data: [],
     meta: {
-      total: 1,
-      per_page: 10,
+      total: 0,
+      per_page: 5,
       page: 1,
-    }
+    },
   },
-
+  reducers: {
+    getList(state, { payload }) {
+      return payload;
+    },
+  },
   effects: {
     *getRemote({ payload: { page, per_page } }, { put, call }):any {
       const data = yield call(getRemoteList, { page, per_page });
@@ -50,14 +51,13 @@ const IndexModel: UserModelType = {
         });
       }
     },
-    *edit({ type, payload: { id, values } }, { put, call }):any {
-      const data = yield call(editRecord, { id, values });
-    },
-    *delete({ payload: { id } }, { put, call, select }) :any {
+    *delete({ payload: { id } }, { put, call, select }):any{
       const data = yield call(deleteRecord, { id });
       if (data) {
         message.success('Delete successfully.');
-        const { page, per_page } = yield select((state: any) => state.users.meta);
+        const { page, per_page } = yield select(
+          (state: any) => state.users.meta,
+        );
         yield put({
           type: 'getRemote',
           payload: {
@@ -70,22 +70,15 @@ const IndexModel: UserModelType = {
       }
     },
   },
-  reducers: {
-    getList(state, { type, payload }) {
-      // getList(state, action) {
-      return payload;
-    },
-    // 启用 immer 之后
-  },
   subscriptions: {
     setup({ dispatch, history }) {
-      return history.listen(({ pathname }) => {
-        if (pathname === '/organization/tenantryDva') {
+      history.listen(({ pathname }) => {
+        if (pathname === '/organization/aspirantzhang_users') {
           dispatch({
             type: 'getRemote',
             payload: {
               page: 1,
-              per_page: 10,
+              per_page: 5,
             },
           });
         }
@@ -94,4 +87,4 @@ const IndexModel: UserModelType = {
   },
 };
 
-export default IndexModel;
+export default UserModel;

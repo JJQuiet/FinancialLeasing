@@ -4,9 +4,9 @@ const Settings: LayoutSettings & {
   pwa?: boolean;
   logo?: string;
 } = {
-  navTheme: 'light',
+  // navTheme: 'light',
   // navTheme: 'dark',
-  // navTheme: 'realDark',
+  navTheme: 'realDark',
   // headerTheme: 'light',
   // 拂晓蓝
   primaryColor: '#1890ff',

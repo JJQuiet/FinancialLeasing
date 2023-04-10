@@ -1,32 +1,86 @@
-import { Button, Table, message, Modal } from 'antd';
-import { connect } from 'umi';
+import { Button, Table, message, Modal, Popconfirm } from 'antd';
+import { Dispatch, connect, Loading, UserState } from 'umi';
 import UserModal from './components/userModal';
-import { useState } from 'react';
+import { useState, FC } from 'react';
+import { SingleUserType, FormValues } from './data.d';
+import { editRecord, addRecord,getRemoteList } from './service';
+import ProTable, { ProColumns } from '@ant-design/pro-table';
 // const getTenantryFields = async (selectedRows: TenantryField[]) => {
 
 // }
+// 仿照aspirantzhang写的，数据也是用他的
+interface UserPageProps {
+  // users: {},
+  users: UserState;
+  dispatch: Dispatch;
+  userListLoading: boolean;
+}
 
-const Index = ({ index,dispatch }) => {
+const UserListPage: FC<UserPageProps> = ({ users, dispatch, userListLoading }) => {
   const [isModalOpen, setIsModaOpen] = useState(false);
-  const [record, setRecord] = useState(undefined);
-  const onFinish = (values: any,record: any) => {
-    const id = record.id;
-    dispatch({
-      type: 'index/edit',
-      payload: {
-        id,
-        values
-      },
-    })
+  const [record, setRecord] = useState<SingleUserType | undefined>(undefined);
+  const onFinish = async (values: FormValues) => {
+    // const onFinish = async (values: any) => {
+    let id = 0;
+    if (record) {
+      id = record.id;
+    }
+    let serviceFun;
+    if (id) {
+      serviceFun = editRecord;
+    } else {
+      serviceFun = addRecord;
+    }
+    const result = await serviceFun({ id, values });
+    if (result) {
+      setIsModaOpen(false);
+      message.success(`${id === 0 ? 'Add' : 'Edit'} Successfully.`);
+      resetHandler();
+    } else {
+      message.error(`${id === 0 ? 'Add' : 'Edit'} Failed.`);
+    }
   };
-  const handleEdit = (record:any) => {
+  const addHandler = () => {
+    setIsModaOpen(true);
+    setRecord(undefined);
+  };
+  const handleEdit = (record: SingleUserType) => {
     setRecord(record);
     setIsModaOpen(true);
+  };
+  const deleteHandler = (id: number) => {
+    dispatch({
+      type: 'users/delete',
+      payload: {
+        id,
+      },
+    });
   };
   const handleClose = () => {
     setIsModaOpen(false);
   };
-  const columns = [
+  // const requestHandler = async ({pageSize,current}:{ pageSize:number, current:number }) => {
+  //   const users = await getRemoteList ({
+  //     page: current,
+  //     per_page: pageSize,
+  //   });
+  //   return {
+  //     data: users.data,
+  //     success: true,
+  //     total: users.meta.total,
+  //   };
+  // };
+  
+  const resetHandler = () => {
+    dispatch({
+      type: 'users/getRemote',
+      payload: {
+        page: users.meta.page,
+        per_page: users.meta.per_page,
+      },
+    });
+  };
+  const columns: ProColumns<SingleUserType>[] = [
     {
       title: 'id',
       dataIndex: 'id',
@@ -45,26 +99,54 @@ const Index = ({ index,dispatch }) => {
     {
       title: 'Action',
       key: 'action',
-      render: (text:any, record:any) => (
-        // <span><a onClick={handleEdit(record)}>edit</a> //只能接收一个函数的名字，不能传入参数；
-        <span>
-          <a
-            onClick={() => {
-              handleEdit(record);
-            }}
-          >
-            edit
-          </a>
-          &nbsp;&nbsp;&nbsp;
-          <a>delete</a>
-        </span>
-      ),
+      valueType: 'option',
+      render: (text: string, record: SingleUserType) => [
+        <a
+          onClick={() => {
+            handleEdit(record);
+          }}
+        >
+          Edit
+        </a>,
+        <Popconfirm
+          title="Are you sure delete this user?"
+          onConfirm={() => {
+            deleteHandler(record.id);
+          }}
+          okText="Yes"
+          cancelText="No"
+        >
+          <a>Delete</a>
+        </Popconfirm>,
+      ],
     },
   ];
 
   return (
-    <div className="jjq list-table">
-      <Table dataSource={index.data} columns={columns} rowKey="id" />
+    <div>
+      <ProTable
+        dataSource={users.data}
+        // request={getRemoteList}
+        // request={requestHandler}
+        columns={columns}
+        rowKey="id"
+        // loading={false}
+        loading={userListLoading}
+        options={{
+          // density: true,
+          // fullScreen: true,
+          reload: () => {
+            resetHandler();
+          },
+          // setting: true,
+        }}
+        toolBarRender={() => [
+          <Button type="primary" onClick={addHandler}>
+            Add
+          </Button>,
+          <Button onClick={resetHandler}>Reload</Button>,
+        ]}
+      />
       <UserModal
         open={isModalOpen}
         close={handleClose}
@@ -74,10 +156,10 @@ const Index = ({ index,dispatch }) => {
     </div>
   );
 };
-const mapStateToProps = ({ index }) => {
+const mapStateToProps = ({ users, loading }: { users: UserState; loading: Loading }) => {
   return {
-    index,
+    users,
+    userListLoading: loading.models.users,
   };
 };
-export default connect(mapStateToProps)(Index);
-// export default Index;
+export default connect(mapStateToProps)(UserListPage);

@@ -75,7 +75,7 @@ export default defineConfig({
       routes: [
         {
           path: '/organization',
-          redirect: '/organization/tenantry',
+          redirect: '/organization/tenantryDva',
         },
         {
           name: '承租客户',
@@ -90,6 +90,13 @@ export default defineConfig({
           path: '/organization/tenantryDva',
           access: 'isBusiness_admin',
           component: './organization/tenantryDva',
+        },
+        {
+          name: 'aspirantzhang_users',
+          icon: 'smile',
+          path: '/organization/aspirantzhang_users',
+          access: 'isBusiness_admin',
+          component: './organization/aspirantzhang_users',
         },
         {
           name: '承租客户02_Dva',
@@ -129,7 +136,7 @@ export default defineConfig({
           icon: 'smile',
           path: '/dashboard/analysis',
           component: './dashboard/analysis',
-          // access: 'isAdmin',
+          access: 'isBusiness_admin',
         },
         {
           name: 'seller02',
@@ -377,7 +384,9 @@ export default defineConfig({
     },
     {
       path: '/',
-      redirect: '/dashboard/analysis',
+      access: 'true',
+      redirect: '/organization/aspirantzhang_users',
+      // redirect: '/dashboard/analysis',
     },
     {
       component: '404',
