@@ -1,16 +1,40 @@
 - 
 - umi3 antD pro v5 complete dva
-- **求知编程学院**[视频学习地址](https://www.bilibili.com/video/BV1SA411H7sX/?spm_id_from=333.999.0.0&vd_source=891093c1caed79794c25fe5f4b8eeae9 "不完整，付费视频，等把把免费的看完再看，有功能实现需求，可以去查查有没有")
 
-- [ ] [一枚猿视频](https://www.bilibili.com/video/BV14b411V7sf "里面讲了登录手机号登录，有空再看") ，第二优先看，有噪音,
+-**求知编程学院**[视频学习地址](https://www.bilibili.com/video/BV1SA411H7sX/?spm_id_from=333.999.0.0&vd_source=891093c1caed79794c25fe5f4b8eeae9)
+
+- [ ] [一枚猿视频](https://www.bilibili.com/video/BV14b411V7sf) ，第二优先看，有噪音,
 - [ ] 一枚猿 [JWT 登录视频教学无源码](https://www.bilibili.com/video/BV1tT4y1j7ZV)
 - [ ] 一枚猿 [微信公众号登录](https://www.bilibili.com/video/BV1ah411y7UQ)
-- [ ] 优先看！[融职商城](https://www.bilibili.com/video/BV1i5411c7xp) github[源码 1](https://github1s.com/infinite7012/antd_pro_shop_admin "jsx") [源码 2](https://github1s.com/ddzyan/antd-pro-shop-admin "tsx") [源码 3](https://github1s.com/13982720426/antd_pro_shop_admin "jsx") [源码 4](https://github1s.com/XYJ-1/antd_pro_shop_admins "tsx") [项目 API 地址](https://www.showdoc.com.cn/1207745568269674/6090123591593835)
+- [ ] 优先看！[融职商城](https://www.bilibili.com/video/BV1i5411c7xp) github[源码 1](https://github1s.com/infinite7012/antd_pro_shop_admin) | [源码 2](https://github1s.com/ddzyan/antd-pro-shop-admin) | [源码 3](https://github1s.com/13982720426/antd_pro_shop_admin) | [源码 4](https://github1s.com/XYJ-1/antd_pro_shop_admins) | [项目 API 地址](https://www.showdoc.com.cn/1207745568269674/6090123591593835)
 - [ ] 张立志的[另一个视频](https://www.bilibili.com/video/BV1g54y187LJ)基于 Ant Design Pro v5 和 Formily v1 的动态模型网站后台
 
 # 版本
 
 ## Branch 最爱白菜呀-实现 proTable
+
+### 1.3.4  登录验证探索
+
+- [umi 基础教程](https://www.bilibili.com/video/BV1pG411879j "千峰教育视频教程") | [网盘资料](https://pan.baidu.com/s/12FNsGeYNr4cwpSIT02SzPw?pwd=fvgm) | [本地资料](F:\users\Documents\IT\webFrontEnd\React\UMI\UMI3.md) | [UmiJS3 蛋糕管理平台](https://www.bilibili.com/video/BV1v94y197uj "千峰前端视频教程") | [网盘资料](https://pan.baidu.com/s/1hX0qTadLVruNGe1MKOb04Q?pwd=1692#list/path=%2Fsharelink2435135190-1060250570428096%2F%E5%8D%83%E9%94%8B%E5%89%8D%E7%AB%AFUmiJS3%E8%9B%8B%E7%B3%95%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0react%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%2F%E5%8D%83%E9%94%8B%E5%89%8D%E7%AB%AFUmiJS3%E8%9B%8B%E7%B3%95%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0react%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%EF%BC%88%E8%B5%84%E6%96%99%EF%BC%89&parentPath=%2Fsharelink2435135190-1060250570428096) | [代码本地](F:\Users\Documents\IT\webFrontEnd\React\UMI\视频课程资料\千峰前端UmjJS3蛋糕管理平台\代码 "winSearch或Typora打开") | [笔记]()
+- fix: proxy 代理里面似乎只能写请求地址的根路径，其余的后缀得用 pathRewriter 代替
+
+- [ ] 学习 typescript 查看源码了解引用的变量的类型、具有的方法、返回的结果
+- [ ] changeLog 自动生成出了问题，之后有时间研究怎么用，现在删除该文件和依赖，以及 package.json 里的 npm 脚本
+
+- 项目启动后一直停在首页，没有任何报错，使用上一个提交版本依然停在首页，意识到可能是环境之类的错误，恰巧用 firefox 调试，页面里显示了/@umijs/runtime" does not exist in container.的报错，根据提示搜索答案要删除.umi 文件夹，方才成功
+
+- [ ] config 里设置以下代码出问题
+
+  ```
+  request: {
+      // dataField:'', //这玩意给我多套一层data，在account/center解构mock的curUser又一直解构报错
+    },
+  ```
+
+- 登录三重验证：自带的initialState，model/loign，localStrage，彼此错杂，待改进
+- 研究分页在后端乱改代码，看看有没有用，，改动的地方的tag //  @edit
+- tenantry02_dva, 自己的数据
+  - 使用selectsql,  使用request和实现后端分页，和批量删除
 
 ### 1.3.2 熟悉应用 userList
 
@@ -18,11 +42,11 @@
 - loading 显示；delete、add 不成功时的 msg 及 modal 弹出设置
 - userModal 里面的表单赋值，提交，如何接收父组件传值，以及表单的布局 layout
 - typescript 跟着张立志学会了一点点
-- proTable里面自带的reload可以写函数，重新dispatch: getList一下，更新数据，因为index宇model的namespace进行了connect
+- proTable 里面自带的 reload 可以写函数，重新 dispatch: getList 一下，更新数据，因为 index 与 model 的 namespace 进行了 connect
 
 - [ ] loading 显示不正确，可以不设置，或是设置 false,[取反](src\pages\organization\tenantryDva\index.tsx)还没成功
 - [ ] index 里的 dispatch delete 不成功
-- [ ] ***非常重要！***登录界面无法验证已经登录，还是停留在登录界面不跳转，实际上已经可以输入其他网址进入系统了
+- [ ] **_非常重要！_**登录界面无法验证已经登录，还是停留在登录界面不跳转，实际上已经可以输入其他网址进入系统了
 
 - visible 弃用改成 open
 
@@ -33,10 +57,11 @@
 
 - 通过 Dva, model 实现了在基础的 Table 上面对 tenantry 的增加，删除，修改 company_name(tenantry03_dva_basicTable)
 - proTable 的数据展示直接 request 里的方法调用和删除行(\_dtenantry02va)
+
   ```javascript
   request(`http://localhost:8081/myServer/doSQL?paramvalues=`+encodeURIComponent(JSON.stringify({sqlprocedure:
   ```
-- [视频](https://www.bilibili.com/video/BV1qz411z7s3/ "张立志")例子入门（tenantryDva)
+- [视频](https://www.bilibili.com/video/BV1qz411z7s3/)例子入门（tenantryDva)
 
 - [ ] proTable 上面还没有修改增加
 - [ ] typescript 声明没有补充
@@ -106,6 +131,11 @@
 - tenantry 承租人
 - seller 出卖人
 
+# 代码内 tag
+
+- @toFix 待解决报错问题
+- //@edit 研究分页在后端乱改代码，看看有没有用，，改动的地方的tagv
+
 # Ant Design Pro
 
 This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
@@ -115,13 +145,17 @@ This project is initialized with [Ant Design Pro](https://pro.ant.design). Follo
 Install `node_modules`:
 
 ```bash
+
 npm install
+
 ```
 
 or
 
 ```bash
+
 yarn
+
 ```
 
 ## Provided Scripts
@@ -133,31 +167,41 @@ Scripts provided in `package.json`. It's safe to modify or add additional script
 ### Start project
 
 ```bash
+
 npm start
+
 ```
 
 ### Build project
 
 ```bash
-npm run build
+
+npm runbuild
+
 ```
 
 ### Check code style
 
 ```bash
-npm run lint
+
+npm runlint
+
 ```
 
 You can also use script to auto fix some lint error:
 
 ```bash
-npm run lint:fix
+
+npm runlint:fix
+
 ```
 
 ### Test code
 
 ```bash
+
 npm test
+
 ```
 
 ## More

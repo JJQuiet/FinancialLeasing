@@ -16,12 +16,6 @@ const Footer: React.FC = () => {
       copyright={`${currentYear} ${defaultMessage}`}
       links={[
         {
-          key: 'Ant Design Pro',
-          title: 'AntD Pro',
-          href: 'https://pro.ant.design/zh-CN/docs/overview',
-          blankTarget: true,
-        },
-        {
           key: 'github',
           title: <GithubOutlined />,
           href: 'https://github.com/JJQuiet/umi03/tree/%E6%9C%80%E7%88%B1%E7%99%BD%E8%8F%9C%E5%91%8001',
@@ -34,9 +28,21 @@ const Footer: React.FC = () => {
           blankTarget: true,
         },
         {
+          key: 'Ant Design Pro',
+          title: 'AntD Pro',
+          href: 'https://pro.ant.design/zh-CN/docs/overview',
+          blankTarget: true,
+        },
+        {
           key: 'Pro components',
-          title: 'Pro components',
+          title: 'Pro组件',
           href: 'https://procomponents.ant.design/components',
+          blankTarget: true,
+        },
+        {
+          key: 'umi',
+          title: 'umi',
+          href: 'https://umijs.org/docs/guides/directory-structure',
           blankTarget: true,
         },
         {

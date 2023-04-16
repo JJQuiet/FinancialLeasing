@@ -9,7 +9,7 @@ import {
   message,
 } from 'antd';
 import ProTable, { ProColumns, TableDropdown } from '@ant-design/pro-table';
-import { connect, Dispatch, Loading, UserState, useModel } from 'umi';
+import { connect, Dispatch, Loading, UserState, useSelector } from 'umi';
 import UserModal from './components/UserModal';
 import { addRecord, editRecord } from './service';
 import { SingleUserType, FormValues } from './data.d';
@@ -28,6 +28,7 @@ const UserListPage: FC<UserPageProps> = ({
   const [modalVisible, setModalVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [record, setRecord] = useState<SingleUserType | undefined>(undefined);
+  const login_state = useSelector((state:any) => state.login);
 
   const columns: ProColumns<SingleUserType>[] = [
     {
@@ -157,6 +158,7 @@ const UserListPage: FC<UserPageProps> = ({
 
   return (
     <div className="list-table">
+      <div>{JSON.stringify(login_state)}</div>
       <ProTable
         columns={columns}
         dataSource={aspirantzhang_users.data}
@@ -209,7 +211,6 @@ const mapStateToProps = ({
   aspirantzhang_users: UserState;
   loading: Loading;
 }) => {
-  console.log('%c [ loading ]', 'font-size:13px; background:pink; color:#b22c02;', loading);
   return {
     aspirantzhang_users,
     userListLoading: loading.models.aspirantzhang_users,

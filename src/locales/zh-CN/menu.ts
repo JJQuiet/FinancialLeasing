@@ -13,6 +13,7 @@ export default {
   "menu.客户管理.承租客户02_Dva":"承租客户02_Dva",
   "menu.客户管理.tenantry03_dva_basicTable":"tenantry03_dva_basicTable",
   "menu.客户管理.承租客户Dva":"承租客户Dva",
+  "menu.客户管理.aspirantzhang_users":"张立志users_Dva",
   'menu.dashboard.analysis': '分析页',
 //   'menu.jlogin1': 'j登录1',
   'menu.dashboard.seller02': 'seller02',

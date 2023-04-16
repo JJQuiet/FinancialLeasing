@@ -9,8 +9,8 @@ import { SingleTenantryType, TenantryState, connect } from 'umi';
 // const getTenantryFields = async (selectedRows: TenantryField[]) => {
 
 // }
-const handleRequest = async ({pageSize,current}:{ pageSize:number, current:number }) => {
-  const data = await getRemoteList();
+const handleRequest = async ({ pageSize, current }: { pageSize: number; current: number }) => {
+  const data = await getRemoteList({ pageSize, current });
   return data;
 };
 const handleRemove = async (selectedRows: TenantryField[]) => {
@@ -34,7 +34,7 @@ const handleRemove = async (selectedRows: TenantryField[]) => {
     return false;
   }
 };
-const Index = (tenantry02_dva:any) => {
+const Index = (tenantry02_dva: any) => {
   const [selectedRowsState, setSelectedRows] = useState<TenantryField[]>([]);
   const actionRef = useRef<ActionType>();
 
@@ -102,7 +102,7 @@ const Index = (tenantry02_dva:any) => {
         rowKey="sysrowno"
         columns={columns}
         request={handleRequest}
-        pagination={{ pageSize: 10 }}
+        // pagination={{ current:2,pageSize: 12 }}
         rowSelection={{
           onChange: (_, selectedRows) => {
             setSelectedRows(selectedRows);
@@ -136,7 +136,7 @@ const Index = (tenantry02_dva:any) => {
   );
 };
 
-const mapStateToProps = ({ tenantry02_dva }:{tenantry02_dva:TenantryState}) => {
+const mapStateToProps = ({ tenantry02_dva }: { tenantry02_dva: TenantryState }) => {
   return {
     tenantry02_dva,
   };

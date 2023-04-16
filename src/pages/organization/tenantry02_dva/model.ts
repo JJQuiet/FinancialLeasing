@@ -1,4 +1,4 @@
-import { Effect, ImmerReducer, Reducer, Subscription } from 'umi';
+import { Effect, Reducer, Subscription } from 'umi';
 import {
   getRemoteList,
   editRecord,
@@ -51,7 +51,7 @@ const IndexModel: IndexModelType = {
 
   effects: {
     // *query({ payload }, { call, put }) {},
-    *getRemote(action, { put, call }) {
+    *getRemote(action, { put, call }): any {
       // *getRemote({ type, payload }, { put, call }) {
       // getRemote(action, effects){
       const data = yield call(getRemoteList);

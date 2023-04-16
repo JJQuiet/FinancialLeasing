@@ -16,6 +16,17 @@ export default {
       // 依赖 origin 的功能可能需要这个，比如 cookie
       changeOrigin: true,
     },
+
+    '/doSQL': {
+      target: 'http://localhost:8081',
+      changeOrigin: true,
+      pathRewrite: { '^/doSQL': '/myServer/doSQL' },
+    },
+    '/fl': {
+      target: 'http://localhost:8081',
+      changeOrigin: true,
+      pathRewrite: { '^/fl': '/myServer/doSQL' },
+    },
   },
   test: {
     '/api/': {

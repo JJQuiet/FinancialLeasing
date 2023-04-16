@@ -2,48 +2,27 @@
 /* eslint-disable */
 
 declare namespace API {
-  type CurUser = {
-    phone?: string;
-    email?: string;
-    password?: string;
-    authority?: string;
-    name?: string;
-    company_name?: string;
-    legal_representative?: string;
-    registered_capital?: number;
-    unified_social_credit_code?: string;
-    official_site?: string;
-    address?: string;
-    phone_company?: string;
-    company_name_english?: string;
-    avatar?: string;
-  };
-  type CurrentUser = {
-    name?: string;
-    avatar?: string;
-    userid?: string;
-    email?: string;
-    signature?: string;
-    title?: string;
-    group?: string;
-    tags?: { key?: string; label?: string }[];
-    notifyCount?: number;
-    unreadCount?: number;
-    country?: string;
-    access?: string;
-    geographic?: {
-      province?: { label?: string; key?: string };
-      city?: { label?: string; key?: string };
-    };
-    address?: string;
-    phone?: string;
-  };
+  // type CurrentUser = {
+  //   name?: string;
+  //   avatar?: string;
+  //   userid?: string;
+  //   email?: string;
+  //   signature?: string;
+  //   title?: string;
+  //   group?: string;
+  //   tags?: { key?: string; label?: string }[];
+  //   notifyCount?: number;
+  //   unreadCount?: number;
+  //   country?: string;
+  //   access?: string;
+  //   geographic?: {
+  //     province?: { label?: string; key?: string };
+  //     city?: { label?: string; key?: string };
+  //   };
+  //   address?: string;
+  //   phone?: string;
+  // };
 
-  type LoginResult = {
-    status?: string;
-    type?: string;
-    currentAuthority?: string;
-  };
 
   type PageParams = {
     current?: number;
@@ -75,13 +54,6 @@ declare namespace API {
   type FakeCaptcha = {
     code?: number;
     status?: string;
-  };
-
-  type LoginParams = {
-    username?: string;
-    password?: string;
-    autoLogin?: boolean;
-    type?: string;
   };
 
   type ErrorResponse = {

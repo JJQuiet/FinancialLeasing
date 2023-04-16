@@ -122,50 +122,14 @@ export default {
     const { password, username, type } = req.body;
     const data = (
       await reqdoSQL({ sqlprocedure: 'b01_login01', phone_or_email: username, password: password })
-    ).rows;
-    if (data.length === 1 && data[0].authority === 'financial_audit_admin') {
+      ).rows;
+      if (data.length === 1) {
       res.send({
         status: 'ok',
         type,
-        currentAuthority: 'financial_audit_admin',
+        currentAuthority: data[0].authority,
       });
-      access = 'financial_audit_admin';
-      return;
-    }
-    if (data.length === 1 && data[0].authority === 'tenantry') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'tenantry',
-      });
-      access = 'tenantry';
-      return;
-    }
-    if (data.length === 1 && data[0].authority === 'project_audit_admin') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'project_audit_admin',
-      });
-      access = 'project_audit_admin';
-      return;
-    }
-    if (data.length === 1 && data[0].authority === 'business_admin') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'business_admin',
-      });
-      access = 'business_admin';
-      return;
-    }
-    if (data.length === 1 && data[0].authority === 'financial_officer') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'financial_officer',
-      });
-      access = 'financial_officer';
+      access = data[0].authority;
       return;
     }
     if (type === 'mobile') {
@@ -231,3 +195,4 @@ export default {
 
   'GET  /api/login/captcha': getFakeCaptcha,
 };
+

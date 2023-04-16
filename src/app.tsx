@@ -1,22 +1,21 @@
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { SettingDrawer } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
-import { RunTimeLayoutConfig, useModel } from 'umi';
-import { history, Link } from 'umi';
+import { RunTimeLayoutConfig } from 'umi';
+import { history } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+// import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
-
-const isDev = process.env.NODE_ENV === 'development';
+import { loginSetCurUser } from './services/login';
+// const { initialState } = useModel('@@initialState');
+// const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
-
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
   loading: <PageLoading />,
 };
-
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
@@ -25,12 +24,17 @@ export async function getInitialState(): Promise<{
   currentUser?: API.CurrentUser;
   curUser?: API.CurUser;
   loading?: boolean;
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  fetchUserInfo?: (values: any) => Promise<API.CurrentUser | undefined>;
 }> {
-  const fetchUserInfo = async () => {
+  const fetchUserInfo = async (values: any) => {
+    let msg;
     try {
-      const msg = await queryCurrentUser();
-      return msg.data;
+      if (Object.keys(values).length !== 0) {
+        msg = await loginSetCurUser(values);
+      } else {
+        msg = (await queryCurrentUser()).data;
+      }
+      return msg;
     } catch (error) {
       history.push(loginPath);
     }
@@ -38,16 +42,10 @@ export async function getInitialState(): Promise<{
   };
   // 如果不是登录页面，执行
   if (history.location.pathname !== loginPath) {
-    // const { initialState, setInitialState } = useModel('@@initialState');
-
-    const currentUser = await fetchUserInfo();
-    // const curUser =
-    // const { currentUser, curUser } = initialState ?? {};
-
+    const currentUser = JSON.parse(localStorage.getItem('localCurUser') || '');
     return {
       fetchUserInfo,
       currentUser,
-      // curUser,
       settings: defaultSettings,
     };
   }
@@ -56,7 +54,6 @@ export async function getInitialState(): Promise<{
     settings: defaultSettings,
   };
 }
-
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {

@@ -1,0 +1,15 @@
+{
+  "loading": false,
+  "data": {
+    "data": {
+      "name": "Serati Ma",
+      "userid": "00000001",
+      "email": "antdesign@alipay.com",
+      "phone": "0752-268888888"
+    }
+  },
+  "params": [],
+  "fetches": {
+    "AHOOKS_USE_REQUEST_DEFAULT_KEY": "dd"
+  }
+}

@@ -1,19 +1,69 @@
 import request from 'umi-request';
 import { message } from 'antd';
-export const getRemoteList = async () => {
-  return request(
-    `http://localhost:8081/myServer/doSQL?paramvalues=` +
-      encodeURIComponent(JSON.stringify({ sqlprocedure: 'b02_select_all_tenantry' })),
-    {
-      method: 'GET',
+
+export async function getRemoteList(
+  params: {
+    // query
+    /** 当前的页码 */
+    current?: number;
+    /** 页面的容量 */
+    pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request<{
+    rows: API.CurrentUser[];
+    // data: API.CurrentUser[];
+    /** 列表的内容总数 */
+    total?: number;
+    success?: boolean;
+  }>('/doSQL', {
+    method: 'GET',
+    params: {
+      paramvalues:{
+        selectsql: 'select * from tenantry',
+        pagesize: params.pageSize,
+        pageno: params.current
+      }
     },
-  )
-    .then(function (response) {
-      return {data:response.rows,success:true};
-    })
-    .catch(function (error) {
-    });
-};
+    ...(options || {}),
+  }).then(res => {
+    console.log('[ res ]-31-「f:/Users/Documents/IT/webFrontEnd/React/umi03/src/pages/organization/tenantry02_dva/service」', res);
+    return { data: res.rows, total: res.total, success: true, }
+  })
+}
+
+//前端分页
+// export const getRemoteList = async () => {
+//   return request('/doSQL', {
+//     params: {
+//       paramvalues: JSON.stringify({ selectsql: 'SELECT * FROM tenantry',pageno: 3,pagesize: 13 }),
+//       // paramvalues: JSON.stringify({ selectsql: 'SELECT * FROM tenantry LIMIT 100;',pageno: 3,pagesize: 13 }),
+//       // paramvalues: JSON.stringify({ sqlprocedure: 'b02_select_all_tenantry' }),
+//       // paramvalues: encodeURIComponent(JSON.stringify({ sqlprocedure: 'b02_select_all_tenantry' })),
+//     },
+//   })
+//     .then(function (response) {
+//       console.log('[ response ]-11-「f:/Users/Documents/IT/webFrontEnd/React/umi03/src/pages/organization/tenantry02_dva/service」', response);
+//       return { data: response.rows, success: true };
+//     })
+//     .catch(function (error) {});
+// };
+// 完整路径版本
+// export const getRemoteList = async () => { 
+//   return request(
+//     `http://localhost:8081/myServer/doSQL?paramvalues=` +
+//       encodeURIComponent(JSON.stringify({ sqlprocedure: 'b02_select_all_tenantry' })),
+//     {
+//       method: 'GET',
+//     },
+//   )
+//     .then(function (response) {
+//       return {data:response.rows,success:true};
+//     })
+//     .catch(function (error) {
+//     });
+// };
 export const editRecord = async ({ values }) => {
   return request(
     `http://localhost:8081/myServer/doSQL?paramvalues=` +

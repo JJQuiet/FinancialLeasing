@@ -9,14 +9,20 @@ import {
 import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { ProFormCaptcha, ProFormCheckbox, ProFormText, LoginForm } from '@ant-design/pro-form';
-import { useIntl, history, FormattedMessage, SelectLang, useModel } from 'umi';
+import {
+  useIntl,
+  history,
+  FormattedMessage,
+  SelectLang,
+  useModel,
+  useDispatch,
+  useSelector,
+} from 'umi';
 import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 
 import styles from './index.less';
-import { reqdoSQL } from '@/api/dosql';
-
 const LoginMessage: React.FC<{
   content: string;
 }> = ({ content }) => (
@@ -29,36 +35,22 @@ const LoginMessage: React.FC<{
     showIcon
   />
 );
-
 const Login: React.FC = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
+  const dispatch = useDispatch();
+
+  const login_State = useSelector((state: any) => state.login);
 
   const intl = useIntl();
 
   const fetchUserInfo = async (values: any) => {
-    // const data = // await reqdoSQL({
-    //   (
-    //     await reqdoSQL({
-    //       sqlprocedure: 'afl007_getRandomRowFromTestProtable',
-    //     })
-    //   ).rows[0];
-    // const userInfo = data;
-    // console.log('%c [ userInfo ]', 'font-size:13px; background:pink; color:#b22c02;', userInfo);
-    const data2 = (
-      await reqdoSQL({
-        sqlprocedure: 'b03_login_curUser',
-        phone_or_email: values.username,
-        authority: values.authority,
-      })
-    ).rows[0];
-    const userInfo = await initialState?.fetchUserInfo?.();
+    const userInfo = await initialState?.fetchUserInfo?.(values);
     if (userInfo) {
       await setInitialState((s) => ({
         ...s,
         currentUser: userInfo,
-        curUser: data2,
       }));
     }
   };
@@ -66,6 +58,11 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: API.LoginParams) => {
     try {
       // 登录
+      dispatch({
+        type: 'login/login',
+        payload: values,
+      });
+      // const login_State =await useSelector((state:any) => state.login);
       const msg = await login({ ...values, type });
       if (msg.status === 'ok') {
         const defaultLoginSuccessMessage = intl.formatMessage({
@@ -95,15 +92,14 @@ const Login: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <div>{JSON.stringify(login_State)}</div>
       <div className={styles.lang} data-lang>
         {SelectLang && <SelectLang />}
       </div>
       <div className={styles.content}>
         <LoginForm
           logo={<img alt="logo" src="/举手yeah.svg" />}
-          // logo={<img alt="logo" src="/logo.svg" />}
           title="融资租赁业务管理系统"
-          // title="Ant Design"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           initialValues={{
             autoLogin: true,
