@@ -26,7 +26,6 @@ export async function rule(
     },
     ...(options || {}),
   }).then((res) => {
-    console.log('[ res ]-29-「 src/pages/list/table-list/service」', res);
     return res;
   });
 }

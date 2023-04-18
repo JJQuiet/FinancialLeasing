@@ -61,16 +61,12 @@ const UserModel: UserModelType = {
     },
     //获取当前登陆用户数据
     *fetchCurrent({payload}, { call, put }):any {
-      console.log('[ payload ]-64-「f:/Users/Documents/IT/webFrontEnd/React/umi03/src/models/users」', payload);
       //看localstroage里是否有用户信息
       let localCurUser = JSON.parse(localStorage.getItem('localCurUser') || '')
-      console.log('[ localCurUser ]-67-「f:/Users/Documents/IT/webFrontEnd/React/umi03/src/models/users」', localCurUser);
       let userInfo;
       if (localCurUser) {
-        console.log('iiiiiiiiiii');
       // if (!localCurUser) {
         userInfo = yield call(loginSetCurUser,localCurUser);
-        console.log('[ userInfo ]-68-「f:/Users/Documents/IT/webFrontEnd/React/umi03/src/models/users」', userInfo);
         //判断是否获取到用户信息
         // if (userInfo.id !== undefined) {
           //把用户信息存入localstroage里

@@ -7,7 +7,7 @@ import {
   WeiboCircleOutlined,
 } from '@ant-design/icons';
 import { Alert, message, Tabs } from 'antd';
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { ProFormCaptcha, ProFormCheckbox, ProFormText, LoginForm } from '@ant-design/pro-form';
 import {
   useIntl,
@@ -15,12 +15,10 @@ import {
   FormattedMessage,
   SelectLang,
   useModel,
-  useDispatch,
-  useSelector,
 } from 'umi';
 import Footer from '@/components/Footer';
-import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
+import { accountLoginState, loginSetCurUser } from '@/services/login';
 
 import styles from './index.less';
 const LoginMessage: React.FC<{
@@ -39,44 +37,33 @@ const Login: React.FC = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
-  const dispatch = useDispatch();
 
-  const login_State = useSelector((state: any) => state.login);
 
   const intl = useIntl();
 
-  const fetchUserInfo = async (values: any) => {
-    const userInfo = await initialState?.fetchUserInfo?.(values);
-    if (userInfo) {
-      await setInitialState((s) => ({
-        ...s,
-        currentUser: userInfo,
-      }));
-    }
-  };
-
   const handleSubmit = async (values: API.LoginParams) => {
     try {
-      // 登录
-      dispatch({
-        type: 'login/login',
-        payload: values,
-      });
-      // const login_State =await useSelector((state:any) => state.login);
-      const msg = await login({ ...values, type });
+      const msg = await accountLoginState(values);
       if (msg.status === 'ok') {
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
           defaultMessage: '登录成功！',
         });
         message.success(defaultLoginSuccessMessage);
-        await fetchUserInfo({ ...values, authority: msg.currentAuthority });
-        /** 此方法会跳转到 redirect 参数所在的位置 */
-        if (!history) return;
-        const { query } = history.location;
-        const { redirect } = query as { redirect: string };
-        history.push(redirect || '/');
-        return;
+        const currentUser = await loginSetCurUser({ ...values, authority: msg.authority });
+
+        if (currentUser) {
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          setInitialState({
+            //更新本地initailState，重新触发layout路由判断
+            isLogin: true,
+            currentUser: currentUser,
+          });
+          // 触发路由切换至 /
+          setTimeout(() => {
+            history.push('/');
+          }, 200);
+        }
       }
       // 如果失败去设置用户错误信息
       setUserLoginState(msg);
@@ -88,11 +75,12 @@ const Login: React.FC = () => {
       message.error(defaultLoginFailureMessage);
     }
   };
+
+  
   const { status, type: loginType } = userLoginState;
 
   return (
-    <div className={styles.container}>
-      <div>{JSON.stringify(login_State)}</div>
+    <div className={styles.container}>  
       <div className={styles.lang} data-lang>
         {SelectLang && <SelectLang />}
       </div>

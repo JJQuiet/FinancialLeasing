@@ -17,10 +17,6 @@ export type GlobalHeaderRightProps = {
  */
 const loginOut = async () => {
   await outLogin();
-  console.log(
-    '[ history.location ]-21-「f:/Users/Documents/IT/webFrontEnd/React/umi03/src/components/RightContent/AvatarDropdown」',
-    history.location,
-  );
   const { query = {}, search, pathname } = history.location;
   const { redirect } = query;
   // Note: There may be security issues, please note
@@ -36,16 +32,12 @@ const loginOut = async () => {
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   const { initialState, setInitialState } = useModel('@@initialState');
-  const dispatch = useDispatch();
   const onMenuClick = useCallback(
     (event: MenuInfo) => {
       const { key } = event;
       if (key === 'logout') {
         setInitialState((s) => ({ ...s, currentUser: undefined }));
-        dispatch({
-          type: 'login/logout',
-        });
-
+        localStorage.removeItem('currentUser');
         loginOut();
         return;
       }
@@ -72,12 +64,12 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
 
   // const { currentUser, curUser } = initialState;
   // const currentUser = JSON.parse(localStorage.getItem('userInfo') || '{}');
-  const userInfoFromStorage = localStorage.getItem('userInfo');
-  const currentUser =
-    userInfoFromStorage && userInfoFromStorage !== 'undefined'
-      ? JSON.parse(userInfoFromStorage)
-      : null;
-
+  // const userInfoFromStorage = localStorage.getItem('currentUser');
+  // const currentUser =
+  //   userInfoFromStorage && userInfoFromStorage !== 'undefined'
+  //     ? JSON.parse(userInfoFromStorage)
+  //     : null;
+  const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
   if (!currentUser || !currentUser.name) {
     return loading;
   }

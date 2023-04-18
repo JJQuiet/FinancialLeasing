@@ -1,5 +1,4 @@
 ﻿export default [
-  // {path: '/jlogin1',component:'./login',name:'jlogin1',icon:'smile'},
   {
     path: '/user',
     layout: false,
@@ -39,14 +38,11 @@
     name: 'welcome',
     icon: 'smile',
     component: './Welcome',
-    // access: 'ture',
   },
   {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
-    // access: 'ture',
-    // access: 'isAdmin',
     component: './Admin',
     routes: [
       {
@@ -63,7 +59,7 @@
   },
   {
     path: '/organization',
-    name: '客户管理',
+    name: '客户信息',
     icon: 'profile',
     access: 'true',
     routes: [
@@ -93,57 +89,29 @@
         component: './organization/aspirantzhang_users',
       },
       {
-        name: '承租客户02_Dva',
-        icon: 'smile',
-        path: '/organization/tenantry02_dva',
-        access: 'isBusiness_admin',
-        component: './organization/tenantry02_dva',
-      },
-      {
         name: 'tenantry03_dva_basicTable',
         icon: 'smile',
         path: '/organization/tenantry03_dva_basicTable',
         access: 'isBusiness_admin',
         component: './organization/tenantry03_dva_basicTable',
       },
-      // {
-      //   name: 'advanced',
-      //   icon: 'smile',
-      //   path: '/organization/advanced',
-      //   component: './organization/advanced',
-      // },
     ],
   },
   {
     path: '/dashboard',
     name: 'dashboard',
     icon: 'dashboard',
-    access: 'isBusiness_admin',
+    access: 'true',
     routes: [
       {
         path: '/dashboard',
-        redirect: '/dashboard/seller02',
+        // redirect: '/dashboard/seller02',
       },
-      { name: 'jlogin', path: '/dashboard/jlogin', component: './login' },
       {
         name: 'analysis',
         icon: 'smile',
         path: '/dashboard/analysis',
         component: './dashboard/analysis',
-        access: 'isBusiness_admin',
-      },
-      {
-        name: 'seller02',
-        icon: 'smile',
-        path: '/dashboard/seller02',
-        component: './organization/seller02',
-        access: 'isBusiness_admin',
-      },
-      {
-        name: 'seller03',
-        icon: 'smile',
-        path: '/dashboard/seller03',
-        component: './organization/seller03',
       },
       {
         name: 'monitor',
@@ -339,7 +307,6 @@
         icon: 'smile',
         path: '/account/center',
         component: './account/center',
-        access: 'true',
       },
       {
         name: 'settings',

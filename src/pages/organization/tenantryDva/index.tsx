@@ -1,9 +1,9 @@
-import { Button, Table, message, Modal, Popconfirm } from 'antd';
+import { Button, message, Popconfirm } from 'antd';
 import { Dispatch, connect, Loading, UserState } from 'umi';
 import UserModal from './components/userModal';
 import { useState, FC } from 'react';
 import { SingleUserType, FormValues } from './data.d';
-import { editRecord, addRecord,getRemoteList } from './service';
+import { editRecord, addRecord } from './service';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
 // const getTenantryFields = async (selectedRows: TenantryField[]) => {
 
@@ -134,7 +134,7 @@ const UserListPage: FC<UserPageProps> = ({ users, dispatch, userListLoading }) =
         loading={userListLoading}
         options={{
           // density: true,
-          // fullScreen: true,
+          fullScreen: true,
           reload: () => {
             resetHandler();
           },

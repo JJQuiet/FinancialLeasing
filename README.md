@@ -1,23 +1,23 @@
-- 
-- umi3 antD pro v5 complete dva
-
--**求知编程学院**[视频学习地址](https://www.bilibili.com/video/BV1SA411H7sX/?spm_id_from=333.999.0.0&vd_source=891093c1caed79794c25fe5f4b8eeae9)
-
-- [ ] [一枚猿视频](https://www.bilibili.com/video/BV14b411V7sf) ，第二优先看，有噪音,
-- [ ] 一枚猿 [JWT 登录视频教学无源码](https://www.bilibili.com/video/BV1tT4y1j7ZV)
-- [ ] 一枚猿 [微信公众号登录](https://www.bilibili.com/video/BV1ah411y7UQ)
-- [ ] 优先看！[融职商城](https://www.bilibili.com/video/BV1i5411c7xp) github[源码 1](https://github1s.com/infinite7012/antd_pro_shop_admin) | [源码 2](https://github1s.com/ddzyan/antd-pro-shop-admin) | [源码 3](https://github1s.com/13982720426/antd_pro_shop_admin) | [源码 4](https://github1s.com/XYJ-1/antd_pro_shop_admins) | [项目 API 地址](https://www.showdoc.com.cn/1207745568269674/6090123591593835)
-- [ ] 张立志的[另一个视频](https://www.bilibili.com/video/BV1g54y187LJ)基于 Ant Design Pro v5 和 Formily v1 的动态模型网站后台
 
 # 版本
 
 ## Branch 最爱白菜呀-实现 proTable
 
-### 1.3.4  登录验证探索
+### 1.4.0 开始赶业务
 
-- [umi 基础教程](https://www.bilibili.com/video/BV1pG411879j "千峰教育视频教程") | [网盘资料](https://pan.baidu.com/s/12FNsGeYNr4cwpSIT02SzPw?pwd=fvgm) | [本地资料](F:\users\Documents\IT\webFrontEnd\React\UMI\UMI3.md) | [UmiJS3 蛋糕管理平台](https://www.bilibili.com/video/BV1v94y197uj "千峰前端视频教程") | [网盘资料](https://pan.baidu.com/s/1hX0qTadLVruNGe1MKOb04Q?pwd=1692#list/path=%2Fsharelink2435135190-1060250570428096%2F%E5%8D%83%E9%94%8B%E5%89%8D%E7%AB%AFUmiJS3%E8%9B%8B%E7%B3%95%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0react%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%2F%E5%8D%83%E9%94%8B%E5%89%8D%E7%AB%AFUmiJS3%E8%9B%8B%E7%B3%95%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0react%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%EF%BC%88%E8%B5%84%E6%96%99%EF%BC%89&parentPath=%2Fsharelink2435135190-1060250570428096) | [代码本地](F:\Users\Documents\IT\webFrontEnd\React\UMI\视频课程资料\千峰前端UmjJS3蛋糕管理平台\代码 "winSearch或Typora打开") | [笔记]()
+- 用蛋糕管理平台的 initialState + loacalStorage 完成登录，没有 token 验证之后再完善
+- 清除了之前的学习教程的代码  afl_系列的存储过程，和fl_系列的表，删除了seller02, 03
+- tenantry的增删改完成 !
+
+- [ ] tenantry查询有时间再做
+- [ ] 学习蛋糕管理平台的数据传输
+
+### 1.3.4 登录验证探索
+
+- [umi 基础教程](https://www.bilibili.com/video/BV1pG411879j "千峰教育视频教程") | [网盘资料](https://pan.baidu.com/s/12FNsGeYNr4cwpSIT02SzPw?pwd=fvgm) | [本地资料](F:\users\Documents\IT\webFrontEnd\React\UMI\UMI3.md) | [UmiJS3 蛋糕管理平台](https://www.bilibili.com/video/BV1v94y197uj "千峰前端视频教程") | [网盘资料](https://pan.baidu.com/s/1hX0qTadLVruNGe1MKOb04Q?pwd=1692#list/path=%2Fsharelink2435135190-1060250570428096%2F%E5%8D%83%E9%94%8B%E5%89%8D%E7%AB%AFUmiJS3%E8%9B%8B%E7%B3%95%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0react%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%2F%E5%8D%83%E9%94%8B%E5%89%8D%E7%AB%AFUmiJS3%E8%9B%8B%E7%B3%95%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0react%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%EF%BC%88%E8%B5%84%E6%96%99%EF%BC%89&parentPath=%2Fsharelink2435135190-1060250570428096) | [代码本地](F:\users\Documents\IT\webFrontEnd\React\UMI\视频课程资料\千峰前端UmjJS3蛋糕管理平台\代码 "winSearch或Typora打开") | [笔记]()
 - fix: proxy 代理里面似乎只能写请求地址的根路径，其余的后缀得用 pathRewriter 代替
 
+- [ ] 优先看！[融职商城](https://www.bilibili.com/video/BV1i5411c7xp) github[源码 1](https://github1s.com/infinite7012/antd_pro_shop_admin) | [源码 2](https://github1s.com/ddzyan/antd-pro-shop-admin) | [源码 3](https://github1s.com/13982720426/antd_pro_shop_admin) | [源码 4](https://github1s.com/XYJ-1/antd_pro_shop_admins) | [项目 API 地址](https://www.showdoc.com.cn/1207745568269674/6090123591593835)
 - [ ] 学习 typescript 查看源码了解引用的变量的类型、具有的方法、返回的结果
 - [ ] changeLog 自动生成出了问题，之后有时间研究怎么用，现在删除该文件和依赖，以及 package.json 里的 npm 脚本
 
@@ -31,10 +31,10 @@
     },
   ```
 
-- 登录三重验证：自带的initialState，model/loign，localStrage，彼此错杂，待改进
-- 研究分页在后端乱改代码，看看有没有用，，改动的地方的tag //  @edit
-- tenantry02_dva, 自己的数据
-  - 使用selectsql,  使用request和实现后端分页，和批量删除
+- 登录有三重验证：自带的 initialState，model/loign，localStrage，彼此错杂，待改进
+- 研究分页在后端乱改代码，看看有没有用，，改动的地方的 tag // @edit
+- tenantry02_dva现被重命名为tenantry, 自己的数据
+  - 使用 selectsql, 使用 request 和实现后端分页，和批量删除
 
 ### 1.3.2 熟悉应用 userList
 
@@ -125,6 +125,17 @@
 - [ ] [入门视频](https://www.bilibili.com/video/BV1Kb411Q7qe)，新建 login 页面，在另一个项目里实现了图片上传，OCR 识别，msg 封装，但是也没看完
 - [ ] 老尚的[另一个视频](https://www.bilibili.com/video/BV1NT411o7U1)，有空看
 
+# 其他资料
+
+- umi3 antD pro v5 complete dva
+
+-**求知编程学院**[视频学习地址](https://www.bilibili.com/video/BV1SA411H7sX/?spm_id_from=333.999.0.0&vd_source=891093c1caed79794c25fe5f4b8eeae9)
+
+- [ ] [一枚猿视频](https://www.bilibili.com/video/BV14b411V7sf) ，第二优先看，有噪音,
+- [ ] 一枚猿 [JWT 登录视频教学无源码](https://www.bilibili.com/video/BV1tT4y1j7ZV)
+- [ ] 一枚猿 [微信公众号登录 ](https://www.bilibili.com/video/BV1ah411y7UQ)
+- [ ] 张立志的[另一个视频](https://www.bilibili.com/video/BV1g54y187LJ)基于 Ant Design Pro v5 和 Formily v1 的动态模型网站后台
+
 # 字段说明
 
 - organization 机构管理
@@ -134,7 +145,7 @@
 # 代码内 tag
 
 - @toFix 待解决报错问题
-- //@edit 研究分页在后端乱改代码，看看有没有用，，改动的地方的tagv
+- //@edit 研究分页在后端乱改代码，看看有没有用，，改动的地方的 tagv
 
 # Ant Design Pro
 

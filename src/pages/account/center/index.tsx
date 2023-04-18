@@ -94,43 +94,15 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
 };
 
 // const Center =  () => {
-  const Center: React.FC<RouteChildrenProps> = () => {
-    const [tabKey, setTabKey] = useState<tabKeyType>('articles');
-    const loginModelState = useSelector((state:any) => state.login);
-    // const currentUser = useSelector((state:any) => state.user)
-    //  获取用户信息
-    // const { data: currentUser, loading } = useRequest('/api/currentUserDetail');
-    // const { data: currentUser, loading } = useRequest(() => {
-      //   return queryCurrent();
-  // });
+const Center: React.FC<RouteChildrenProps> = () => {
+  const [tabKey, setTabKey] = useState<tabKeyType>('articles');
   const { initialState } = useModel('@@initialState');
   const { loading } = initialState || {};
-  const dispatch = useDispatch();
-  const curUser = JSON.parse(localStorage.getItem('localCurUser') || '');
-  dispatch({
-    type: 'user/fetchCurrent',
-    payload: curUser
-  })
-  // const { currentUser, loading } = initialState || {};
-  console.log('[ curUser ]-110-「f:/Users/Documents/IT/webFrontEnd/React/umi03/src/pages/account/center/index」', curUser);
-  // const currentUser = JSON.parse(localStorage.getItem('userInfo') || '');
-  
-  const userInfoFromStorage = localStorage.getItem('userInfo');
-  const currentUser =
-    userInfoFromStorage && userInfoFromStorage !== 'undefined'
-      ? JSON.parse(userInfoFromStorage)
-      : null;
-  console.log('[ currentUser ]-111-「f:/Users/Documents/IT/webFrontEnd/React/umi03/src/pages/account/center/index」', currentUser);
-
-  // if(loading){
-  //   return (
-  //     <div>loading is {loading}</div>
-  //   )
-  // }
+  const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
   if (currentUser) {
     //  渲染用户信息
     const renderUserInfo = ({ title, department, geographic }: Partial<CurrentUser>) => {
-    // const renderUserInfo = ({ title, group, geographic }: Partial<CurrentUser>) => {
+      // const renderUserInfo = ({ title, group, geographic }: Partial<CurrentUser>) => {
       return (
         <div className={styles.detail}>
           <p>
@@ -186,9 +158,6 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
 
     return (
       <GridContent>
-        <div>{JSON.stringify(loginModelState)}</div>
-        <br></br>
-        <div>{JSON.stringify(localStorage.getItem('localCurUser'))}</div>
         <Row gutter={24}>
           <Col lg={7} md={24}>
             <Card bordered={false} style={{ marginBottom: 24 }} loading={loading}>

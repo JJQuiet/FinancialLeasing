@@ -19,7 +19,6 @@ const Model: LoginModelType = {
   effects: {
     *login({ payload }, { call, put }): any {
       const response = yield call(accountLoginState, payload);
-      console.log('[ response ]-21-「/src/models/login」', response);
       if (response.status === 'ok') {
         message.success('登陆成功 login model')
         yield put({
@@ -43,10 +42,6 @@ const Model: LoginModelType = {
   },
   reducers: {
     changeLoginStatus(state, { payload }) {
-      console.log(
-        '[ payload ]-「f:/users/Documents/IT/webFrontEnd/React/umi03/src/models/login」',
-        payload,
-      );
 
       // setAuthority(payload.access_token);
       //将token存入locallstorage里

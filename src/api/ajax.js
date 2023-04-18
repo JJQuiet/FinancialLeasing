@@ -14,8 +14,10 @@
          });
        }else{ // 发POST请求
          promise = axios.post(url, data);
+         console.log('[ url ]-17-「f:/users/Documents/IT/webFrontEnd/React/umi03/src/api/ajax」', url);
        }
        promise.then(response => { //2.如果成功了, 调用resolve(value)
+        console.log('[ response ]-19-「 ajax src/api/ajax」', response);
          resolve(response.data);
        }).catch(error => { //3.如果失败,不调用reject(reason), 而是提示异常信息。
          // reject(error)

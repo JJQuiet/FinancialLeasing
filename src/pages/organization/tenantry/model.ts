@@ -26,7 +26,7 @@ export interface TenantryState {
 }
 
 export interface IndexModelType {
-  namespace: 'tenantry02_dva';
+  namespace: 'tenantry';
   state: TenantryState;
   effects: {
     getRemote: Effect;
@@ -42,7 +42,7 @@ export interface IndexModelType {
   subscriptions: { setup: Subscription };
 }
 const IndexModel: IndexModelType = {
-  namespace: 'tenantry02_dva',
+  namespace: 'tenantry',
 
   state: {
     data: [],
@@ -95,7 +95,7 @@ const IndexModel: IndexModelType = {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
-        if (pathname === '/organization/tenantry02_dva') {
+        if (pathname === '/organization/tenantry') {
           // dispatch({
           //   type: 'getRemote',
           // });

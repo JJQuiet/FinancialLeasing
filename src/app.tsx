@@ -22,40 +22,31 @@ export const initialStateConfig = {
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
-  curUser?: API.CurUser;
+  isLogin?: boolean;
   loading?: boolean;
+  curUser?: API.CurUser;
   fetchUserInfo?: (values: any) => Promise<API.CurrentUser | undefined>;
 }> {
-  const fetchUserInfo = async (values: any) => {
-    let msg;
-    try {
-      if (Object.keys(values).length !== 0) {
-        msg = await loginSetCurUser(values);
-      } else {
-        msg = (await queryCurrentUser()).data;
-      }
-      return msg;
-    } catch (error) {
-      history.push(loginPath);
-    }
-    return undefined;
-  };
+  // let currentUser = localStorage.getItem('userInfo') || sessionStorage.getItem('userInfo')
+  let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+  if (currentUser) {
+  }
   // 如果不是登录页面，执行
   if (history.location.pathname !== loginPath) {
-    const currentUser = JSON.parse(localStorage.getItem('localCurUser') || '');
+    let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
     return {
-      fetchUserInfo,
       currentUser,
       settings: defaultSettings,
     };
   }
   return {
-    fetchUserInfo,
+    currentUser,
     settings: defaultSettings,
   };
 }
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+  // getInitialState()
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
@@ -97,7 +88,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
               enableDarkTheme
               settings={initialState?.settings}
               onSettingChange={(settings) => {
-                setInitialState((preInitialState) => ({
+                setInitialState((preInitialState: any) => ({
                   ...preInitialState,
                   settings,
                 }));

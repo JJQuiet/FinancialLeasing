@@ -35,6 +35,7 @@ declare namespace API {
     avatar?: string;
   };
   type CurrentUser = {
+    authority?: string;
     access?: string;
     address?: string;
     age?: number;
@@ -51,6 +52,7 @@ declare namespace API {
       city?: { label?: string; key?: string };
     };
     group?: string;
+    isLogin?: boolean;
     legal_representative?: string;
     name?: string;
     notifyCount?: number;
@@ -63,6 +65,7 @@ declare namespace API {
     political_status?: string;
     registered_capital?: number;
     signature?: string;
+    sysrowno?: number;
     tags?: { key?: string; label?: string }[];
     title?: string;
     unified_social_credit_code?: string;

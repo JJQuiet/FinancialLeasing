@@ -2,12 +2,12 @@
  * @see https://umijs.org/zh-CN/plugins/plugin-access
  * */
 export default function access(
-  initialState: { currentUser?: API.CurrentUser; curUser: API.CurUser } | undefined,
+  initialState: { currentUser?: API.CurrentUser;} | undefined,
 ) {
-  const { currentUser, curUser } = initialState ?? {};
+  const { currentUser } = initialState ?? {};
   return {
-    isUser: curUser && curUser.authority === 'user',
-    canAccount: curUser,
-    isBusiness_admin: curUser && curUser.authority === 'business_admin',
+    isUser: currentUser && currentUser.authority === 'user',
+    canAccount: currentUser,
+    isBusiness_admin: currentUser && currentUser.authority === 'business_admin',
   };
 }
