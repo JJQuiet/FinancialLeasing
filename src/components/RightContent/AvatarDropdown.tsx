@@ -62,13 +62,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
     return loading;
   }
 
-  // const { currentUser, curUser } = initialState;
-  // const currentUser = JSON.parse(localStorage.getItem('userInfo') || '{}');
-  // const userInfoFromStorage = localStorage.getItem('currentUser');
-  // const currentUser =
-  //   userInfoFromStorage && userInfoFromStorage !== 'undefined'
-  //     ? JSON.parse(userInfoFromStorage)
-  //     : null;
+  
   const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
   if (!currentUser || !currentUser.name) {
     return loading;
@@ -99,7 +93,14 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   return (
     <HeaderDropdown overlay={menuHeaderDropdown}>
       <span className={`${styles.action} ${styles.account}`}>
-        <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
+        <Avatar
+          size="small"
+          className={styles.avatar}
+          src={
+            currentUser.avatar ? currentUser.avatar : 'https://api.multiavatar.com/y78ddT6U9.png'
+          }
+          alt="avatar"
+        />
         <span className={`${styles.name} anticon`}>{currentUser.name}</span>
       </span>
     </HeaderDropdown>

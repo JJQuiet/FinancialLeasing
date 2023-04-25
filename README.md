@@ -1,15 +1,44 @@
-
 # 版本
 
 ## Branch 最爱白菜呀-实现 proTable
 
+### 1.5.0 从数据表的丰富和页面的丰富初步体现业务流程的完整性
+
+- 按照流程去做，一步步做
+- lessee/news_feed
+- public里面的文件可以直接通过路径  '/ '+相对public的路径 访问
+- account个人中心也要放到路由配置的前面，否则可能也加载不了组件内容
+- 页面租赁/租赁物（lease/lease_item）的增删改，仿照tenantry
+- 页面租赁/抵押品 的路由设置和页面但是数据库表数据还没生成
+- 客户端的融资申请页面分步填写表单做的算是除proTable外最好的组件了，要广泛应用
+- financing_application融资申请index.tsx为企业，index2.tsx为个人
+- due-deligence的初代页面的index, detail，edit页面显示正常，存档记录
+- project-approve项目审批和project-approved已审批通过的项目，页面正常，存档记录
+
+- [ ] 树形分类以及微信群里面提出来的其它要求
+- [X] 首次加载界面sideNav侧边导航栏会显示为黑色，再刷新一次才会显示为light
+- [ ] mortgage_items数据表还没模拟生成
+- [ ] 租赁物lease_item和租赁抵押品mortgage_item
+- [ ] 客户端的融资申请页面的字段要和数据库表的信息做 合并 merge
+- [ ] 对网格的行编辑操作不放到网格里的最后一列去占用位置
+- [X] 主题色和布局登录后再刷新一次的问题暂时放一下
+- [ ] quotation报价这个页面很有问题，要么大改，要么删掉，有时间再处理
+- [ ] news_feed前沿消息属于是我自己的臆想，有时间和能力改好再放出来
+- [ ] 融资申请页面的分步表单建立下拉框数据来源机械设备的类型表和信息表
+- [ ] progress_of_application进度查询这个页面存在性有，但是数据列设置的很有问题，暂时隐藏，有时间再改
+- [ ] sign_contract存在性较合理，但是合同签订完全不知道怎么做
+- [ ] supplier供应商复制的tenantry，但是增删改还没做
+- [ ] 角色表里面的business_admin、financial_audit_admin、financial_manager、project_audit_admin暂时与主业务无关，放一放先
+- [ ] due-diligence的数据来源表tenants太简单了,表重做，或者换表
+- [ ] project-approve项目审批和project-approved已审批通过的项目的数据表project-approve很有问题，项目名称租赁物名称最好也不要那样命名
+
 ### 1.4.0 开始赶业务
 
 - 用蛋糕管理平台的 initialState + loacalStorage 完成登录，没有 token 验证之后再完善
-- 清除了之前的学习教程的代码  afl_系列的存储过程，和fl_系列的表，删除了seller02, 03
-- tenantry的增删改完成 !
+- 清除了之前的学习教程的代码 afl*系列的存储过程，和 fl*系列的表，删除了 seller02, 03
+- tenantry 的增删改完成 !
 
-- [ ] tenantry查询有时间再做
+- [ ] tenantry 查询有时间再做
 - [ ] 学习蛋糕管理平台的数据传输
 
 ### 1.3.4 登录验证探索
@@ -33,7 +62,7 @@
 
 - 登录有三重验证：自带的 initialState，model/loign，localStrage，彼此错杂，待改进
 - 研究分页在后端乱改代码，看看有没有用，，改动的地方的 tag // @edit
-- tenantry02_dva现被重命名为tenantry, 自己的数据
+- tenantry02_dva 现被重命名为 tenantry, 自己的数据
   - 使用 selectsql, 使用 request 和实现后端分页，和批量删除
 
 ### 1.3.2 熟悉应用 userList

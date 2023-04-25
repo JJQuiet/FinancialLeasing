@@ -45,6 +45,7 @@ declare namespace API {
     company_name?: string;
     company_name_english?: string;
     country?: string;
+    department?: string;
     email?: string;
     gender?: string;
     geographic?: {
@@ -52,7 +53,11 @@ declare namespace API {
       city?: { label?: string; key?: string };
     };
     group?: string;
+    hire_date?: string; //入职时间
+    id?: number;
+    id_card_number?: string; //身份证号
     isLogin?: boolean;
+    leave_date?: string; //离职时间
     legal_representative?: string;
     name?: string;
     notifyCount?: number;
@@ -63,8 +68,11 @@ declare namespace API {
     phone_company?: string;
     phone_or_email?: string;
     political_status?: string;
+    position?: string; //职位
     registered_capital?: number;
+    remark?: string; //备注
     signature?: string;
+    status?: string; //在职状态
     sysrowno?: number;
     tags?: { key?: string; label?: string }[];
     title?: string;
@@ -72,5 +80,17 @@ declare namespace API {
     unreadCount?: number;
     userid?: string;
     username?: string; //指的是登录界面输入的用户名
+  };
+  // 项目审批  project_to_approve
+  type Project = {
+    id?: number;
+    customer?: string;
+    item?: string;
+    term?: number;
+    amount?: number;
+    type?: string;
+    supplier?: string;
+    MODE?: string;
+    STATUS?: string;
   };
 }

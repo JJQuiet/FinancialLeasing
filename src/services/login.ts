@@ -27,8 +27,6 @@ export async function loginSetCurUser(data: any) {
       paramvalues: JSON.stringify({
         sqlprocedure: 'b03_login_curUser',
         phone_or_email: data.username,
-        // phone_or_email: data.username,
-        // authority: data.currentAuthority
         authority: data.authority,
       }),
     },

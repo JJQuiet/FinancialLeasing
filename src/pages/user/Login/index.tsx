@@ -7,15 +7,9 @@ import {
   WeiboCircleOutlined,
 } from '@ant-design/icons';
 import { Alert, message, Tabs } from 'antd';
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { ProFormCaptcha, ProFormCheckbox, ProFormText, LoginForm } from '@ant-design/pro-form';
-import {
-  useIntl,
-  history,
-  FormattedMessage,
-  SelectLang,
-  useModel,
-} from 'umi';
+import { useIntl, history, FormattedMessage, SelectLang, useModel } from 'umi';
 import Footer from '@/components/Footer';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 import { accountLoginState, loginSetCurUser } from '@/services/login';
@@ -38,7 +32,6 @@ const Login: React.FC = () => {
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
 
-
   const intl = useIntl();
 
   const handleSubmit = async (values: API.LoginParams) => {
@@ -54,15 +47,14 @@ const Login: React.FC = () => {
 
         if (currentUser) {
           localStorage.setItem('currentUser', JSON.stringify(currentUser));
-          setInitialState({
-            //更新本地initailState，重新触发layout路由判断
-            isLogin: true,
-            currentUser: currentUser,
-          });
+          //更新本地initailState，重新触发layout路由判断
+          setInitialState((s) => ({ ...s, currentUser: currentUser }));
           // 触发路由切换至 /
           setTimeout(() => {
             history.push('/');
           }, 200);
+          // 强制浏览器重新加载页面
+          // location.reload();
         }
       }
       // 如果失败去设置用户错误信息
@@ -76,11 +68,10 @@ const Login: React.FC = () => {
     }
   };
 
-  
   const { status, type: loginType } = userLoginState;
 
   return (
-    <div className={styles.container}>  
+    <div className={styles.container}>
       <div className={styles.lang} data-lang>
         {SelectLang && <SelectLang />}
       </div>

@@ -52,9 +52,21 @@ const Footer: React.FC = () => {
           blankTarget: true,
         },
         {
+          key: 'icon',
+          title: 'icon',
+          href: 'https://4x-ant-design.antgroup.com/components/icon-cn/',
+          blankTarget: true,
+        },
+        {
           key: 'dvajs',
           title: 'DVA',
           href: 'https://dvajs.com/guide/',
+          blankTarget: true,
+        },
+        {
+          key: 'preview.pro',
+          title: 'preview.pro',
+          href: 'https://preview.pro.ant.design/',
           blankTarget: true,
         },
       ]}

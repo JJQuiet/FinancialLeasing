@@ -5,11 +5,8 @@ import { RunTimeLayoutConfig } from 'umi';
 import { history } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 // import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
-import { loginSetCurUser } from './services/login';
-// const { initialState } = useModel('@@initialState');
 // const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 /** 获取用户信息比较慢的时候会展示一个 loading */
@@ -27,10 +24,8 @@ export async function getInitialState(): Promise<{
   curUser?: API.CurUser;
   fetchUserInfo?: (values: any) => Promise<API.CurrentUser | undefined>;
 }> {
-  // let currentUser = localStorage.getItem('userInfo') || sessionStorage.getItem('userInfo')
   let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-  if (currentUser) {
-  }
+
   // 如果不是登录页面，执行
   if (history.location.pathname !== loginPath) {
     let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
@@ -46,7 +41,8 @@ export async function getInitialState(): Promise<{
 }
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
-  // getInitialState()
+  const currentUser = initialState?.currentUser;
+  const isTopMenu = currentUser && (currentUser.authority === 'newcomer' || currentUser.authority === 'tenantry');
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
@@ -99,5 +95,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       );
     },
     ...initialState?.settings,
+    layout: isTopMenu ? 'top' : 'side',
+    fixedHeader: isTopMenu,
   };
 };
