@@ -73,13 +73,13 @@
     routes: [
       {
         path: '/asset',
-        redirect: '/asset/lease_item'
+        redirect: '/asset/lease_item',
       },
       {
         path: '/asset/lease_item',
         name: '租赁物',
         access: 'is_asset_manager',
-        icon: 'car'
+        icon: 'car',
       },
       {
         path: '/asset/mortgage',
@@ -87,27 +87,27 @@
         access: 'is_asset_manager',
         icon: 'pound',
       },
-    ]
+    ],
   },
-  // 资产管理部 
+  // 资产管理部
   //财务部  财务管理员 financial_manager
 
   //承租客户 业务部 业务管理员 business_admin
   {
-      name: '承租客户',
-      icon: 'smile',
-      path: '/business-unit/tenantry',
-      access: 'is_business_admin',
-      component: './organization/tenantry',
+    name: '承租客户',
+    icon: 'smile',
+    path: '/business-unit/tenantry',
+    access: 'is_business_admin',
+    component: './organization/tenantry',
   },
-  // 客户开发 业务部 业务管理员 business_admin 
+  // 客户开发 业务部 业务管理员 business_admin
   {
     name: '客户开发',
     icon: 'barChart',
     path: 'customer-develop',
-    access: 'is_business_admin'
+    access: 'is_business_admin',
   },
-  // 项目审批 风控部门 project_audit_admin  
+  // 项目审批 风控部门 project_audit_admin
   {
     path: '/project_approve',
     name: '项目审批',
@@ -115,7 +115,7 @@
     access: 'is_project_audit_admin',
     component: './project/project-approve',
   },
-  // 尽职调查 风控部门 project_audit_admin 
+  // 尽职调查 风控部门 project_audit_admin
   {
     path: '/due-diligence',
     name: '尽职调查',
@@ -139,15 +139,23 @@
     name: '风险评估',
     icon: 'lineChart',
     component: './project/due-diligence-card',
-    access: 'is_project_audit_admin'
+    access: 'is_project_audit_admin',
+  },
+  // project_audio_admin 设备管理 树形设备网格
+  {
+    path: '/equipment',
+    name: '租赁设备',
+    icon: 'cluster',
+    component: './general/equipment',
+    access: 'is_project_audit_admin',
   },
   // 合同签订 风控部门 project_audit_admin
   {
-    path:'contract-signing',
+    path: 'contract-signing',
     name: '合同签订',
-    icon:'highlight'
+    icon: 'highlight',
   },
-  // 已通过的项目 project_audit_admin  
+  // 已通过的项目 project_audit_admin
   {
     path: '/project_approved',
     name: '已审批通过的项目',
@@ -227,11 +235,11 @@
         component: './role/financial_manager',
       },
       {
-        path: '/role/finacial_audit_admin',
+        path: '/role/financial_audit_admin',
         name: '财务审核员',
         icon: 'smile',
         access: 'is_super_admin',
-        component: './role/finacial_audit_admin',
+        component: './role/financial_audit_admin',
       },
       {
         path: '/role/project_audit_admin',

@@ -1,5 +1,5 @@
 // 引入相关组件
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StepsForm,
   ProFormText,
@@ -9,6 +9,23 @@ import {
   ProFormUploadButton,
 } from '@ant-design/pro-form';
 import { message } from 'antd';
+import { request } from 'umi';
+type EquipmentType = {
+  id: number;
+  type_name: string;
+};
+
+type EquipmentInfo = {
+  id: number;
+  model_number: string;
+  type_id: number;
+  manufacturer: string;
+  specifications: string;
+  supplier: string;
+  production_year: string;
+  notes: string;
+  image_url: string;
+};
 
 // 定义步骤标题
 const steps = [
@@ -31,18 +48,60 @@ const steps = [
 
 // 定义页面组件
 const FinancingApplication = () => {
+  const [selectedTypeId, setSelectedTypeId] = useState<number | null>(null);
+  const [equipmentTypes, setEquipmentTypes] = useState<EquipmentType[]>([]);
+  const [equipmentInfo, setEquipmentInfo] = useState<EquipmentInfo[]>([]);
+  const [selectedEquipment, setSelectedEquipment] = useState<EquipmentInfo | null>(null);
+
+  useEffect(() => {
+    request('/doSQL', {
+      params: {
+        paramvalues: {
+          selectsql: 'select * from equipment_types',
+          sortfield: 'id',
+        },
+      },
+    })
+      .then((data) => setEquipmentTypes(data.rows))
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    if (selectedTypeId) {
+      request('/doSQL', {
+        params: {
+          paramvalues: {
+            selectsql: `select * from equipment_info where type_id=${selectedTypeId}`,
+            sortfield: 'id',
+          },
+        },
+      })
+        .then((data) => setEquipmentInfo(data.rows))
+        .catch((error) => console.error(error));
+    } else {
+      setEquipmentInfo([]);
+    }
+  }, [selectedTypeId]);
+  const renderEquipmentInfo = () =>
+    selectedEquipment && (
+      <div>
+        <h3>选中设备的详细信息：</h3>
+        <p>设备制造商名称：{selectedEquipment.manufacturer}</p>
+        <p>设备供应商名称：{selectedEquipment.supplier}</p>
+        <p>生产年份：{selectedEquipment.production_year}</p>
+        <p>机械设备规格：{selectedEquipment.specifications}</p>
+        <p>设备其他信息：{selectedEquipment.notes}</p>
+        <img style={{ width: '200px', height: '200px' }} src={selectedEquipment.image_url} alt={selectedEquipment.model_number} />
+      </div>
+    );
   // 定义表单提交成功后的回调函数
   const onFinish = async (values: any) => {
-    console.log('[ values ]-36-「onFinish src/pages/lessee/financing_application/index」', values);
     // 模拟发送请求
     await new Promise((resolve) => setTimeout(resolve, 1000));
     // 显示成功提示
     message.success('提交成功');
     // 打印表单数据
-
-    console.log(values);
   };
-
   return (
     // 使用StepsForm组件创建分步表单
     <StepsForm
@@ -55,7 +114,21 @@ const FinancingApplication = () => {
       }}
     >
       {/* 第一步：承租人基本信息 */}
-      <StepsForm.StepForm name="basic" title="承租人基本信息">
+      <StepsForm.StepForm
+        name="basic"
+        title="承租人基本信息"
+        initialValues={{
+          name: '张三',
+          id: '1234567890',
+          address: '北京市海淀区',
+          phone: '13800138000',
+          email: 'zhangsan@example.com',
+          representative: '张三',
+          capital: '100万人民币',
+          scope: '房地产开发；物业管理；建筑工程',
+          finance: '稳健',
+        }}
+      >
         <ProFormText name="name" label="名称" width="md" rules={[{ required: true }]} />
         <ProFormText name="id" label="身份证号" width="md" rules={[{ required: true }]} />
         <ProFormText name="address" label="地址" width="md" rules={[{ required: true }]} />
@@ -73,6 +146,34 @@ const FinancingApplication = () => {
       </StepsForm.StepForm>
       {/* 第二步：租赁物件基本信息 */}
       <StepsForm.StepForm name="object" title="租赁物件基本信息">
+        <ProFormSelect
+          name="type_id"
+          label="设备类型"
+          options={equipmentTypes.map((type) => ({
+            value: type.id,
+            label: type.type_name,
+          }))}
+          fieldProps={{
+            onChange: (value) => setSelectedTypeId(value),
+          }}
+        />
+        <ProFormSelect
+          name="equipment_info"
+          label="设备规格"  
+          // label="设备信息"
+          options={equipmentInfo?.map((info) => ({
+            value: info.id,
+            label: info.model_number,
+          }))}
+          fieldProps={{
+            onChange: (value: any) => {
+              const selected = equipmentInfo.find((info) => info.id === value);
+              setSelectedEquipment(selected ?? null);
+            },
+          }}
+          extra={renderEquipmentInfo()}
+        />
+
         <ProFormText name="name" label="名称" width="md" rules={[{ required: true }]} />
         <ProFormText name="specification" label="规格" width="md" rules={[{ required: true }]} />
         <ProFormText name="model" label="型号" width="md" rules={[{ required: true }]} />

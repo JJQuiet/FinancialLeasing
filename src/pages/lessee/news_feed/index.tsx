@@ -15,40 +15,6 @@ const LeaseCustomer: React.FC = () => {
   const [projects, setProjects] = useState<Project[] | []>([]);
   const [policies, setPolicies] = useState<Policy[] | []>([]);
   const [trainings, setTrainings] = useState<Training[] | []>([]);
-
-  // 使用useRequest hook来发送请求，获取后端数据
-  // const { rows: projectData } =
-  //   useRequest(
-  //     '/doSQL?paramvalues=' +
-  //       encodeURIComponent(JSON.stringify({ selectsql: 'select * from project' })),
-  //   ).data || {};
-  // // const { data: projectData } = useRequest('/api/projects');
-  // const { rows: policyData } =
-  //   useRequest(
-  //     '/doSQL?paramvalues=' +
-  //       encodeURIComponent(JSON.stringify({ selectsql: 'select * from policy' })),
-  //   ).data || {};
-  // // const { data: policyData } = useRequest('/api/policies');
-  // const { rows: trainingData } =
-  //   useRequest(
-  //     '/doSQL?paramvalues=' +
-  //       encodeURIComponent(JSON.stringify({ selectsql: 'select * from training' })),
-  //   ).data || {};
-  // const data = useRequest(
-  //   '/doSQL?paramvalues=' +
-  //     encodeURIComponent(JSON.stringify({ selectsql: 'select * from training' })),
-  // );
-  // const { data: trainingData } = useRequest('/api/trainings');
-  // const {data:projectData} = await getProjectData();
-  // const {data:policyData} = await getPolicyData();
-  // const {data:trainingData} = await getTrainingData();
-  // 使用useEffect hook来更新状态变量，当请求数据变化时触发
-  // useEffect(() => {
-  //   // const {data:projectData} = await getProjectData();
-  //   if (projectData) {
-  //     setProjects(projectData);
-  //   }
-  // }, [projectData]);
   useEffect(() => {
     (async () => {
       // 使用await return request来获取数据
@@ -80,17 +46,6 @@ const LeaseCustomer: React.FC = () => {
     })();
   }, []);
 
-  // useEffect(() => {
-  //   if (policyData) {
-  //     setPolicies(policyData);
-  //   }
-  // }, [policyData]);
-
-  // useEffect(() => {
-  //   if (trainingData) {
-  //     setTrainings(trainingData);
-  //   }
-  // }, [trainingData]);
 
   // 定义一个渲染标签页的函数，根据不同的key来返回不同的组件
   const renderTabContent = (key: string) => {

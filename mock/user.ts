@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { reqdoSQL } from '../src/api/dosql';
 
 const waitTime = (time: number = 100) => {
   return new Promise((resolve) => {
@@ -118,37 +117,6 @@ export default {
       address: 'Sidney No. 1 Lake Park',
     },
   ],
-  'POST /api/login/account': async (req: Request, res: Response) => {
-    const { password, username, type } = req.body;
-    const data = (
-      await reqdoSQL({ sqlprocedure: 'b01_login01', phone_or_email: username, password: password })
-      ).rows;
-      if (data.length === 1) {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: data[0].authority,
-      });
-      access = data[0].authority;
-      return;
-    }
-    if (type === 'mobile') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'admin',
-      });
-      access = 'admin';
-      return;
-    }
-
-    res.send({
-      status: 'error',
-      type,
-      currentAuthority: 'guest',
-    });
-    access = 'guest';
-  },
   'POST /api/login/outLogin': (req: Request, res: Response) => {
     access = '';
     res.send({ data: {}, success: true });

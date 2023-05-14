@@ -7,6 +7,7 @@ import routes from './routes';
 
 const { REACT_APP_ENV } = process.env;
 
+
 export default defineConfig({
   access: {
     strictMode: true,
@@ -16,7 +17,10 @@ export default defineConfig({
     // dataField:'', //这玩意给我多套一层data，在account/center解构mock的curUser又一直解构报错，@toFix
   },
   devServer: {
-    port: 8557,
+    port: 8557, 
+    watchContentBase: true, // 监听文件变化
+    // liveReload: true, // 开启浏览器自动刷新
+    hot: true, // 开启热更新
   },
   hash: true,
   antd: {},
@@ -31,7 +35,6 @@ export default defineConfig({
   },
   // https://umijs.org/zh-CN/plugins/plugin-locale
   locale: {
-    // default zh-CN
     default: 'zh-CN',
     antd: true,
     // default true, when it is true, will use `navigator.language` overwrite default
@@ -62,7 +65,7 @@ export default defineConfig({
     basePath: '/',
   },
   // Fast Refresh 热更新
-  fastRefresh: {},
+  // fastRefresh: {},
   openAPI: [
     {
       requestLibPath: "import { request } from 'umi'",

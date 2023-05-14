@@ -98,7 +98,7 @@ const ProjectApprove: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    <>
       <ProTable<API.Project>
         headerTitle="待审批项目列表"
         actionRef={actionRef}
@@ -120,7 +120,7 @@ const ProjectApprove: React.FC = () => {
           setting: true,
         }}
       />
-    </PageContainer>
+    </>
   );
 };
 
