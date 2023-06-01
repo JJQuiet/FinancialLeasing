@@ -22,6 +22,16 @@ export default {
       changeOrigin: true,
       pathRewrite: { '^/doSQL': '/myServer/doSQL' },
     },
+    '/doFileUpload': {
+      target: 'http://localhost:8081',
+      changeOrigin: true,
+      pathRewrite: { '^/doFileUpload': '/myServer/doFileUpload' },
+    },
+    '/tianyan': {
+      target: 'http://open.api.tianyancha.com',
+      changeOrigin: true,
+      pathRewrite: { '^/tianyan': '' }, 
+    },
     '/fl': {
       target: 'http://localhost:8081',
       changeOrigin: true,

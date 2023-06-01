@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
-import { Button, Card, Collapse, Menu, Space, Table } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { useState, useEffect, useRef } from 'react';
+import { Button, Menu, Modal, message } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import type { EquipmentType, EquipmentInfo } from './data.d';
 import EquipmentTypeForm from './components/EquipmentTypeForm';
 import EquipmentInfoForm from './components/EquipmentInfoForm';
@@ -13,20 +12,22 @@ import {
   deleteEquipmentType,
   deleteEquipmentInfo,
   editEquipmentInfo,
+  deleteRecords,
 } from './service';
-import { ColumnProps } from 'antd/lib/table';
-import ProTable, { ProColumns } from '@ant-design/pro-table';
-
-const { Panel } = Collapse;
+import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
+import { request } from 'umi';
+import { FooterToolbar } from '@ant-design/pro-layout';
 
 const Equipment: React.FC = () => {
   const [equipmentTypes, setEquipmentTypes] = useState<EquipmentType[]>([]);
   const [equipmentInfo, setEquipmentInfo] = useState<EquipmentInfo[]>([]);
   const [selectedType, setSelectedType] = useState<Number | null>(1);
   const [selectedEquipment, setSelectedEquipment] = useState<EquipmentInfo | null>(null);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [typeFormVisible, setTypeFormVisible] = useState(false);
   const [infoFormVisible, setInfoFormVisible] = useState(false);
+  const actionRef = useRef<ActionType>();
+  const [selectedRowsState, setSelectedRows] = useState([]);
 
   useEffect(() => {
     getEquipmentTypes().then((res) => setEquipmentTypes(res.rows));
@@ -72,11 +73,11 @@ const Equipment: React.FC = () => {
       ),
     },
     {
-      title: '设备制造商名称',
+      title: '设备制造商',
       dataIndex: 'manufacturer',
     },
     {
-      title: '设备供应商名称',
+      title: '设备供应商',
       dataIndex: 'supplier',
       width: 150,
     },
@@ -105,32 +106,102 @@ const Equipment: React.FC = () => {
       },
     },
   ];
+  const handleDeleteType = (typeId) => {
+    // 发送 DELETE 请求删除设备类型，并更新设备类型列表
+    deleteEquipmentType(typeId).then(() => {
+      message.success('删除成功');
+      getEquipmentTypes().then((res) => setEquipmentTypes(res.rows));
+      setSelectedType(null);
+    });
+  };
+  const deleteType = (type_id, type_name) => {
+    Modal.confirm({
+      title: (
+        <div>
+          确认删除 <strong>{type_name}</strong> ?
+        </div>
+      ),
+      okText: '删除',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        // 执行删除操作
+        request('/doSQL', {
+          params: {
+            paramvalues: {
+              sqlprocedure: `delete_equipment_type`,
+              id: type_id,
+            },
+          },
+        }).then(() => {
+          getEquipmentTypes().then((res) => setEquipmentTypes(res.rows));
+        });
+      },
+    });
+  };
+  const handleRemove = async (selectedRowKeys) => {
+    const hide = message.loading('正在删除');
+    if (!selectedRowKeys) return true;
+    // const res = selectedRows.map((row) => row.phone);
+    const keys = selectedRowKeys.toString();
+    // const keys = res.toString();
+    const len = selectedRowKeys.length;
+    try {
+      await deleteRecords({ keys, len });
+      hide();
+      message.success('删除成功，即将刷新');
+      return true;
+    } catch (error) {
+      hide();
+      message.error('删除失败，请重试');
+      return false;
+    }
+  };
 
   return (
-    // <PageContainer>
     <div>
       <div style={{ display: 'flex', height: 'calc(100vh - 64px)' }}>
-        {/* <div style={{ overflow: 'auto', flex: 1 }}> */}
         <div style={{ overflow: 'auto', width: 'auto' }}>
           <Menu
             mode="inline"
             selectedKeys={selectedType ? [selectedType.toString()] : []}
-            // style={{ width: 256 }}
             onClick={({ key }) => {
               setSelectedType(parseInt(key));
-              // setSelectedType(key);
-              console.log(selectedType);
             }}
+            // onContextMenu={(e) => {
+            //   e.preventDefault();
+            //   e.stopPropagation();
+            //   showContextMenu(e);
+            // }}
           >
             {equipmentTypes.map((type) => (
-              <Menu.Item key={type.id}>{type.type_name}</Menu.Item>
+              <Menu.Item
+                key={type.id}
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                  deleteType(type.id, type.type_name);
+                }}
+              >
+                {type.type_name}
+              </Menu.Item>
             ))}
+            <Menu.Item
+              key="add"
+              // icon={<PlusOutlined />}
+              style={{ marginTop: 10 }}
+              onClick={() => {
+                setTypeFormVisible(true);
+              }}
+            >
+              {<PlusOutlined />}
+            </Menu.Item>
           </Menu>
         </div>
         {/* 表格数据展示区域 */}
         <div style={{ overflow: 'auto', flex: 1 }}>
           <ProTable
             rowKey="id"
+            actionRef={actionRef}
             // dataSource={equipmentInfo}
             dataSource={equipmentInfo.filter((info) => Number(info.type_id) === selectedType)}
             columns={columns}
@@ -138,8 +209,9 @@ const Equipment: React.FC = () => {
               selectedRowKeys.length > 0
                 ? {
                     selectedRowKeys,
-                    onChange: (selectedRowKeys: string[]) => {
-                      setSelectedRowKeys(selectedRowKeys);
+                    onChange: (_, selectedRow) => {
+                      setSelectedRowKeys(selectedRow.map((row) => row.id));
+                      // setSelectedRowKeys(selectedRowKeys);
                     },
                   }
                 : undefined
@@ -183,9 +255,9 @@ const Equipment: React.FC = () => {
               ) : (
                 ''
               ),
-              <Button type="primary" onClick={() => setTypeFormVisible(true)}>
-                添加设备类型
-              </Button>,
+              // <Button type="primary" onClick={() => setTypeFormVisible(true)}>
+              //   添加设备类型
+              // </Button>,
               <Button
                 type="primary"
                 // disabled={selectedRowKeys.length !== 1}
@@ -195,6 +267,26 @@ const Equipment: React.FC = () => {
               </Button>,
             ]}
           />
+          {selectedRowKeys?.length > 0 && (
+            <FooterToolbar
+              extra={
+                <div>
+                  已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项 &nbsp;&nbsp;
+                </div>
+              }
+            >
+              <Button
+                onClick={async () => {
+                  await handleRemove(selectedRowKeys);
+                  setSelectedRows([]);
+                  getEquipmentInfos().then((res) => setEquipmentInfo(res.rows));
+                  actionRef.current?.reloadAndRest?.();
+                }}
+              >
+                批量删除
+              </Button>
+            </FooterToolbar>
+          )}
         </div>
       </div>
       <EquipmentTypeForm
@@ -215,6 +307,7 @@ const Equipment: React.FC = () => {
           addEquipmentInfo({ ...values, type_id: selectedType }).then(() => {
             setSelectedEquipment(null);
             getEquipmentInfos().then((res) => setEquipmentInfo(res.rows));
+            actionRef.current?.reloadAndRest?.();
           });
           setInfoFormVisible(false);
         }}
@@ -222,7 +315,6 @@ const Equipment: React.FC = () => {
         initialValues={selectedEquipment}
       />
     </div>
-    // </PageContainer>
   );
 };
 

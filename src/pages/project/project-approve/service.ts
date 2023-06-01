@@ -18,7 +18,14 @@ export async function handleRequest(params: { current?: number; pageSize?: numbe
     return { data: res.rows, total: res.total, success: true };
   });
 }
-export async function getProjects({ current = 1, pageSize = 10 ,status }: { current?: number, pageSize?: number ,status: string}) {
+export async function getProjects({
+  current = 1,
+  pageSize = 10,
+}: {
+  current?: number;
+  pageSize?: number;
+}) {
+  // export async function getProjects({ current = 1, pageSize = 10 ,status }: { current?: number, pageSize?: number ,status: string}) {
   return request<{
     rows: API.Project[];
     total?: number;
@@ -26,18 +33,20 @@ export async function getProjects({ current = 1, pageSize = 10 ,status }: { curr
   }>('/doSQL', {
     params: {
       paramvalues: {
-        selectsql: 'select * from project_to_approve',
+        selectsql: 'select * from financing_approval',
         pagesize: pageSize,
         pageno: current,
-        filtersql: `status='`+status+`'`,
+        // filtersql: `status='`+status+`'`,
         sortfield: 'id desc',
       },
     },
   }).then((res) => {
+    console.log(res);
+    // return { data: res.rows, success: true };
     return { data: res.rows, total: res.total, success: true };
   });
 }
-export async function updateProject(id:number , {status}: {status: string}) {
+export async function updateProject(id: number, { status }: { status: string }) {
   return request<{
     rows: API.Project[];
     total?: number;
@@ -47,7 +56,7 @@ export async function updateProject(id:number , {status}: {status: string}) {
       paramvalues: {
         sqlprocedure: 'b08_updateProject',
         id: id,
-        status : status,
+        status: status,
       },
     },
   }).then((res) => {
@@ -55,6 +64,28 @@ export async function updateProject(id:number , {status}: {status: string}) {
     return { data: res.rows, total: res.total, success: true };
   });
 }
+export const updateAssment = async (id, value) => {
+  console.log(
+    '[ id ]-61-「f:/users/Documents/IT/webFrontEnd/React/umi03/src/pages/project/project-approve/service」',
+    id,
+  );
+  console.log(
+    '[ value ]-61-「f:/users/Documents/IT/webFrontEnd/React/umi03/src/pages/project/project-approve/service」',
+    value,
+  );
+  return request('/doSQL', {
+    params: {
+      paramvalues: JSON.stringify({
+        sqlprocedure: 'b09_update_project_assessment',
+        id: id,
+        assessment: value,
+      }),
+    },
+  }).then((res) => {
+    console.log('sssssu');
+  });
+};
+
 export const editRecord = async ({ id, values }: any) => {
   return request('/doSQL', {
     params: {

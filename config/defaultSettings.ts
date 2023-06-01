@@ -6,7 +6,7 @@ const Settings: LayoutSettings & {
 } = {
   //使footer只显示在主页，其他页面不显示
   footerRender: false,
-  navTheme: 'realDark',
+  // navTheme: 'realDark',
   primaryColor: '#722ED1',
   contentWidth: 'Fluid',
   fixedHeader: false,

@@ -111,9 +111,36 @@
   {
     path: '/project_approve',
     name: '项目审批',
-    icon: 'clockCircle',
+    icon: 'audit',
     access: 'is_project_audit_admin',
     component: './project/project-approve',
+  },
+  // 项目详情
+  {
+    path: '/project_approve/detail/:id',
+    component: './project/project-approve/ProjectDetail',
+    access: 'is_project_audit_admin',
+  },
+  // 合同签订 风控部门 project_audit_admin
+  {
+    path: '/contract/contract-sign',
+    name: '合同签订',
+    icon: 'highlight',
+    access: 'is_project_audit_admin',
+    component: './contract/contract-sign',
+  },
+  {
+    path: '/contract/contract-sign/detail/:id',
+    component: './contract/contract-sign/Detail',
+    access: 'is_project_audit_admin',
+  },
+  //还款管理 风控部门 project_audit_admin
+  {
+    path: '/rental-payment',
+    name: '还款管理',
+    icon: 'moneyCollect',
+    component: '@/pages/general/repayment',
+    access: 'is_project_audit_admin',
   },
   // 尽职调查 风控部门 project_audit_admin
   {
@@ -121,7 +148,7 @@
     name: '尽职调查',
     icon: 'fileSearch',
     component: './project/due-diligence',
-    access: 'is_project_audit_admin',
+    // access: 'is_project_audit_admin',
   },
   {
     path: '/due-diligence/detail/:id',
@@ -139,7 +166,7 @@
     name: '风险评估',
     icon: 'lineChart',
     component: './project/due-diligence-card',
-    access: 'is_project_audit_admin',
+    // access: 'is_project_audit_admin',
   },
   // project_audio_admin 设备管理 树形设备网格
   {
@@ -149,20 +176,41 @@
     component: './general/equipment',
     access: 'is_project_audit_admin',
   },
+  // 客户管理
+  {
+    path: '/customer',
+    name: '客户管理',
+    icon: 'team',
+    access: 'is_project_audit_admin',
+    routes: [
+      {
+        path: '/customer',
+        redirect: '/customer/lessee',
+      },
+      {
+        path: '/customer/lessee',
+        name: '承租客户',
+        access: 'is_project_audit_admin',
+        icon: 'user',
+        component: './customer/customer-list',
+      },
+      {
+        path: '/customer/customer-credit',
+        name: '客户信用',
+        access: 'is_project_audit_admin',
+        icon: 'creditCard',
+        component: './customer/customer-credit',
+      },
+    ],
+  },
+
   // 合同签订 风控部门 project_audit_admin
   {
     path: 'contract-signing',
     name: '合同签订',
     icon: 'highlight',
   },
-  // 已通过的项目 project_audit_admin
-  {
-    path: '/project_approved',
-    name: '已审批通过的项目',
-    icon: 'check',
-    access: 'is_project_audit_admin',
-    component: './project/project-approved',
-  },
+
   // 客户端 融资租赁项目的最新信息、政策更新以及培训信息
   {
     path: '/news_feed',

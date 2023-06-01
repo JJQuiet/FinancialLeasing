@@ -2,6 +2,12 @@
 
 ## Branch 最爱白菜呀-实现 proTable
 
+### 1.7.0 项目审批
+
+- 新增项目审批、合同签订、还款管理！
+
+- [ ] src\pages\project\project-approve\ProjectDetail.tsx 中的 Columns 配置项设置 width 没用
+
 ### 1.6.0 具体的租赁物-机械设备
 
 - 机械设备设备类型及信息
@@ -13,31 +19,31 @@
 
 - 按照流程去做，一步步做
 - lessee/news_feed
-- public里面的文件可以直接通过路径  '/ '+相对public的路径 访问
-- account个人中心也要放到路由配置的前面，否则可能也加载不了组件内容
-- 页面租赁/租赁物（lease/lease_item）的增删改，仿照tenantry
+- public 里面的文件可以直接通过路径 '/ '+相对 public 的路径 访问
+- account 个人中心也要放到路由配置的前面，否则可能也加载不了组件内容
+- 页面租赁/租赁物（lease/lease_item）的增删改，仿照 tenantry
 - 页面租赁/抵押品 的路由设置和页面但是数据库表数据还没生成
-- 客户端的融资申请页面分步填写表单做的算是除proTable外最好的组件了，要广泛应用
-- financing_application融资申请index.tsx为企业，index2.tsx为个人
-- due-deligence的初代页面的index, detail，edit页面显示正常，存档记录
-- project-approve项目审批和project-approved已审批通过的项目，页面正常，存档记录
+- 客户端的融资申请页面分步填写表单做的算是除 proTable 外最好的组件了，要广泛应用
+- financing_application 融资申请 index.tsx 为企业，index2.tsx 为个人
+- due-deligence 的初代页面的 index, detail，edit 页面显示正常，存档记录
+- project-approve 项目审批和 project-approved 已审批通过的项目，页面正常，存档记录
 
 - [ ] 树形分类以及微信群里面提出来的其它要求
-- [X] 首次加载界面sideNav侧边导航栏会显示为黑色，再刷新一次才会显示为light
-- [ ] mortgage_items数据表还没模拟生成
-- [ ] 租赁物lease_item和租赁抵押品mortgage_item
+- [x] 首次加载界面 sideNav 侧边导航栏会显示为黑色，再刷新一次才会显示为 light
+- [ ] mortgage_items 数据表还没模拟生成
+- [ ] 租赁物 lease_item 和租赁抵押品 mortgage_item
 - [ ] 客户端的融资申请页面的字段要和数据库表的信息做 合并 merge
 - [ ] 对网格的行编辑操作不放到网格里的最后一列去占用位置
-- [X] 主题色和布局登录后再刷新一次的问题暂时放一下
-- [ ] quotation报价这个页面很有问题，要么大改，要么删掉，有时间再处理
-- [ ] news_feed前沿消息属于是我自己的臆想，有时间和能力改好再放出来
-- [X] 融资申请页面的分步表单建立下拉框数据来源机械设备的类型表和信息表
-- [ ] progress_of_application进度查询这个页面存在性有，但是数据列设置的很有问题，暂时隐藏，有时间再改
-- [ ] sign_contract存在性较合理，但是合同签订完全不知道怎么做
-- [ ] supplier供应商复制的tenantry，但是增删改还没做
-- [ ] 角色表里面的business_admin、financial_audit_admin、financial_manager、project_audit_admin暂时与主业务无关，放一放先
-- [ ] due-diligence的数据来源表tenants太简单了,表重做，或者换表
-- [ ] project-approve项目审批和project-approved已审批通过的项目的数据表project-approve很有问题，项目名称租赁物名称最好也不要那样命名
+- [x] 主题色和布局登录后再刷新一次的问题暂时放一下
+- [ ] quotation 报价这个页面很有问题，要么大改，要么删掉，有时间再处理
+- [ ] news_feed 前沿消息属于是我自己的臆想，有时间和能力改好再放出来
+- [x] 融资申请页面的分步表单建立下拉框数据来源机械设备的类型表和信息表
+- [ ] progress_of_application 进度查询这个页面存在性有，但是数据列设置的很有问题，暂时隐藏，有时间再改
+- [ ] sign_contract 存在性较合理，但是合同签订完全不知道怎么做
+- [ ] supplier 供应商复制的 tenantry，但是增删改还没做
+- [ ] 角色表里面的 business_admin、financial_audit_admin、financial_manager、project_audit_admin 暂时与主业务无关，放一放先
+- [ ] due-diligence 的数据来源表 tenants 太简单了,表重做，或者换表
+- [ ] project-approve 项目审批和 project-approved 已审批通过的项目的数据表 project-approve 很有问题，项目名称租赁物名称最好也不要那样命名
 
 ### 1.4.0 开始赶业务
 
@@ -50,7 +56,7 @@
 
 ### 1.3.4 登录验证探索
 
-- [umi 基础教程](https://www.bilibili.com/video/BV1pG411879j "千峰教育视频教程") | [网盘资料](https://pan.baidu.com/s/12FNsGeYNr4cwpSIT02SzPw?pwd=fvgm) | [本地资料](F:\users\Documents\IT\webFrontEnd\React\UMI\UMI3.md) | [UmiJS3 蛋糕管理平台](https://www.bilibili.com/video/BV1v94y197uj "千峰前端视频教程") | [网盘资料](https://pan.baidu.com/s/1hX0qTadLVruNGe1MKOb04Q?pwd=1692#list/path=%2Fsharelink2435135190-1060250570428096%2F%E5%8D%83%E9%94%8B%E5%89%8D%E7%AB%AFUmiJS3%E8%9B%8B%E7%B3%95%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0react%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%2F%E5%8D%83%E9%94%8B%E5%89%8D%E7%AB%AFUmiJS3%E8%9B%8B%E7%B3%95%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0react%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%EF%BC%88%E8%B5%84%E6%96%99%EF%BC%89&parentPath=%2Fsharelink2435135190-1060250570428096) | [代码本地](F:\users\Documents\IT\webFrontEnd\React\UMI\视频课程资料\千峰前端UmjJS3蛋糕管理平台\代码 "winSearch或Typora打开") | [笔记]()
+- [umi 基础教程](https://www.bilibili.com/video/BV1pG411879j '千峰教育视频教程') | [网盘资料](https://pan.baidu.com/s/12FNsGeYNr4cwpSIT02SzPw?pwd=fvgm) | [本地资料](F:\users\Documents\IT\webFrontEnd\React\UMI\UMI3.md) | [UmiJS3 蛋糕管理平台](https://www.bilibili.com/video/BV1v94y197uj '千峰前端视频教程') | [网盘资料](https://pan.baidu.com/s/1hX0qTadLVruNGe1MKOb04Q?pwd=1692#list/path=%2Fsharelink2435135190-1060250570428096%2F%E5%8D%83%E9%94%8B%E5%89%8D%E7%AB%AFUmiJS3%E8%9B%8B%E7%B3%95%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0react%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%2F%E5%8D%83%E9%94%8B%E5%89%8D%E7%AB%AFUmiJS3%E8%9B%8B%E7%B3%95%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0react%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%EF%BC%88%E8%B5%84%E6%96%99%EF%BC%89&parentPath=%2Fsharelink2435135190-1060250570428096) | [代码本地](F:\users\Documents\IT\webFrontEnd\React\UMI\视频课程资料\千峰前端UmjJS3蛋糕管理平台\代码 'winSearch或Typora打开') | [笔记]()
 - fix: proxy 代理里面似乎只能写请求地址的根路径，其余的后缀得用 pathRewriter 代替
 
 - [ ] 优先看！[融职商城](https://www.bilibili.com/video/BV1i5411c7xp) github[源码 1](https://github1s.com/infinite7012/antd_pro_shop_admin) | [源码 2](https://github1s.com/ddzyan/antd-pro-shop-admin) | [源码 3](https://github1s.com/13982720426/antd_pro_shop_admin) | [源码 4](https://github1s.com/XYJ-1/antd_pro_shop_admins) | [项目 API 地址](https://www.showdoc.com.cn/1207745568269674/6090123591593835)
@@ -97,6 +103,7 @@
   ```javascript
   request(`http://localhost:8081/myServer/doSQL?paramvalues=`+encodeURIComponent(JSON.stringify({sqlprocedure:
   ```
+
 - [视频](https://www.bilibili.com/video/BV1qz411z7s3/)例子入门（tenantryDva)
 
 - [ ] proTable 上面还没有修改增加
@@ -147,7 +154,7 @@
 
 ### 1.0.1-解决首页登录成功
 
-- [X] user/login 总是报登录失败的错误
+- [x] user/login 总是报登录失败的错误
 
   1. 由 npm dev 启动改成 npm start 启动
 
