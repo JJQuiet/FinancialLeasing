@@ -386,6 +386,7 @@
       },
     ],
   },
+  // #region 系统自带模块
   //welcome
   {
     path: '/welcome',
@@ -632,3 +633,4 @@
     component: '404',
   },
 ];
+// #endregion
